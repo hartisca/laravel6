@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public array $content;
     /**
      * Create a new message instance.
      *
@@ -20,6 +20,7 @@ class TestMail extends Mailable
      */
     public function __construct(array $content)
     {
+        $this->content = [];
         $this->content = $content;
     }
 
@@ -36,7 +37,7 @@ class TestMail extends Mailable
     }
 
     public function build(){
-        return $this->markdown('2daw.equip06@fp.insjoaquimmir.cat')
+        return $this->markdown('mails.testmail')
         ->with('content', $this->content);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ Route::get('/', function () {
     Log::info('Loading welcome page');
     return view('welcome');
 });
+
+Route::get('mail/test', [MailController::class, 'test']);

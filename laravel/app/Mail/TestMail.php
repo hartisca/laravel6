@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public array $content;
+    
     /**
      * Create a new message instance.
      *
@@ -20,7 +20,7 @@ class TestMail extends Mailable
      */
     public function __construct(array $content)
     {
-        $this->content = [];
+        
         $this->content = $content;
     }
 

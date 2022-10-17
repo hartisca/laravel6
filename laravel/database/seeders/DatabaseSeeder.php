@@ -17,19 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        $admin = new User([
-            'name'      => config('admin.name'),
-            'email'     => config('admin.email'),
-            'password'  => Hash::make(config('admin.password')),
-        ]);
-        $admin->save();
-    }
- 
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-    
+    }
 }

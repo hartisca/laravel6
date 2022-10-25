@@ -20,7 +20,7 @@
                        <tbody>
                            @foreach ($files as $file)
                            <tr>
-                               <td>{{ $file->id }}</td>
+                               <td><a href="{{ route('files.show',$file) }}">{{ $file->id }}</a></td>                               
                                <td>{{ $file->filepath }}</td>
                                <td>{{ $file->filesize }}</td>
                                <td>{{ $file->created_at }}</td>

@@ -83,7 +83,7 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        //
+        return view('files.show', ['file'=>$file]);
     }
 
     /**
@@ -116,7 +116,8 @@ class FileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(File $file)
-    {
-        //
+    {      
+        $file->delete();        
+        return redirect("/files")->with('success','File deleted successfully');
     }
 }

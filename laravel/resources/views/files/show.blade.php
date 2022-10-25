@@ -10,7 +10,7 @@
                        <tbody>                           
                            <tr>
                                 <td>
-
+                                    
                                 </td>
                                 <td>
                                     <form method="POST" action="{{route('files.destroy', [$file->id])}}"> 

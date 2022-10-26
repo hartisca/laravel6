@@ -8,19 +8,7 @@
                            </tr>
                        </thead>
                        <tbody>                           
-                           <tr>
-                                <td>
-                                    
-                                </td>
-                                <td>
-                                    <form method="POST" action="{{route('files.destroy', [$file->id])}}"> 
-                                    @csrf
-                                    @method('DELETE')               
-                                    <button type="sumbit" class="btn btn-primary">Delete</button>
-                                    </form>
-                                </td>
-                              
-                           </tr>                          
+                                                  
                        </tbody>
                    </table>
 @endsection

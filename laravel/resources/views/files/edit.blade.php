@@ -17,8 +17,7 @@
     </div>
         <br>
         <button type="submit" class="btn btn-primary">Save</button>   
-        <button type="reset" class="btn btn-secondary">Reset</button>   
-        </form>
+        <button type="reset" class="btn btn-secondary">Reset</button>           
     </tbody>
 </table>
                    

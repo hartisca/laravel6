@@ -26,16 +26,16 @@
                                <td>{{ $file->filesize }}</td>
                                <td>{{ $file->created_at }}</td>
                                <td>{{ $file->updated_at }}</td>
-                               <td>
-                                    <a href="{{ route('files.edit', $file->id) }}"> Editar </a> <!-- Cambiar boton -->
-                                    
+                               <td>                                   
+                                    <form action="{{route('files.edit', $file->id )}}">                                                      
+                                        <button type="sumbit" class="btn btn-primary">Edit</button>
+                                    </form>
                                </td>
-
                                <td>
                                     <form method="POST" action="{{route('files.destroy', $file->id )}}"> 
                                         @csrf
                                         @method('DELETE')               
-                                        <button type="sumbit" class="btn btn-primary">Delete</button>
+                                        <button type="sumbit" class="btn btn-danger">Delete</button>
                                     </form>
                                </td>
                                 

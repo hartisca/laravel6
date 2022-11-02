@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->primary('id'); //hauria de ser clau primaria buscar com implementar pq dona problemes (ho treiem pq aixi funciona)
-            $table->string('filepath');
-            $table->integer('filesize');
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('posts');
     }
 };

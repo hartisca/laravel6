@@ -14,10 +14,11 @@ class File extends Model
         'filepath'
         
     ];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
  
-
-
-
-
-
 }

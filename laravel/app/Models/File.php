@@ -14,7 +14,15 @@ class File extends Model
         'filepath'
         
     ];
- 
+    public function place(){
+
+        return $this->belongsTo(Place::class);
+    }
+    public function places(){
+
+        return $this->hasMany(Place::class);
+    }
+
 
 
 

@@ -12,20 +12,21 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {   Schema::create('places', function (Blueprint $table) {
-        $table->primary('id'); 
-        $table->bigInteger('id', 20);
-        $table-> string('name',255);
-        $table-> string('description');
-        $table-> bigInteger ('file_id', 20);
-        $table->float ('latitude');
-        $table-> float ('longitude');
-        $table-> bigInteger ('category_id',20);
-        $table->bigInteger ('visibility_id');
-        $table->bigInteger ('author_id',20);
-        $table-> timestamps ('created_at');
-        $table-> timestamps ('uptated_at');
-           
+    {   
+        Schema::create('places', function (Blueprint $table) {
+        
+            $table->id();
+            $table->string('name',255);
+            $table->string('description',255);
+            $table->unsignedBigInteger ('file_id');
+            $table->foreign('file_id')->references ('id')->on ('files');
+            $table->float ('latitude',8,2);
+            $table->float ('longitude',8,2);
+            $table->unsignedBigInteger ('category_id');
+            $table->unsignedBigInteger ('visibility_id');
+            $table->unsignedBigInteger ('author_id');
+            $table->foreign('author_id')->references('id')->on ('users');
+            $table-> timestamps ();//aixo hauria de crear updated i created at
         });
     }
 

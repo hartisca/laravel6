@@ -5,7 +5,7 @@
    <div class="row justify-content-center">
        <div class="col-md-8">
            <div class="card">
-               <div class="card-header">{{ __('Posts') }}</div>
+               <div class="card-header">{{ __('posts') }}</div>
                <div class="card-body">
                    <table class="table">
                        <thead>
@@ -23,9 +23,9 @@
                            @foreach ($posts as $post)
                            <tr>
                                <td><a href="{{ route('posts.show',$post) }}">{{ $post->id }}</a></td>                               
-                               <td>{{ $post->Latitude }}</td>
-                               <td>{{ $post->Longitude }}</td>
-                               <td>{{ $post->author_id->name }}</td>
+                               <td>{{ $post->latitude }}</td>
+                               <td>{{ $post->longitude }}</td>
+                               <td>{{ $post->author_id }}</td>
                                <td>{{ $post->created_at }}</td>
                                <td>{{ $post->updated_at }}</td>
                                <td>                                   

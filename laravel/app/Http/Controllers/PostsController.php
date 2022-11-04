@@ -87,7 +87,7 @@ class PostsController extends Controller
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
-            return redirect()->route("files.create") ///////// AQUI TAMBE!!!
+            return redirect()->route("files.create") ///////// AQUI TAMBE
                ->with('error', 'ERROR uploading file');
         }
     }
@@ -98,9 +98,12 @@ class PostsController extends Controller
      * @param  \App\Models\posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function show(posts $posts)
+    public function show(posts $post)
     {
-        //
+        $file=File::find($post->file_id);
+        return view('posts.show', [
+            'post'=>$post, 
+            'file'=>$file]);
     }
 
     /**

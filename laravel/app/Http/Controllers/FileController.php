@@ -42,7 +42,7 @@ class FileController extends Controller
             'upload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
         ]);
     
-        // Obtenir dades del fitxer
+        
         $upload = $request->file('upload');
         $fileName = $upload->getClientOriginalName();
         $fileSize = $upload->getSize();

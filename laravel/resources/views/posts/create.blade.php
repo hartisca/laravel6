@@ -5,14 +5,14 @@
             <input type="file" class="form-control" name="upload"/>
        <br>
             <label for="Latitude">Latitude:</label>
-            <input type="text" class="form-control" name="Latitude"/>
+            <input type="text" class="form-control" name="latitude"/>
        <br>
             <label for="Longitude">Longitude:</label>
-            <input type="text" class="form-control" name="Longitude"/>
+            <input type="text" class="form-control" name="longitude"/>
        <br>
-            <label for="comentario">Escribe tu texto:</label>
+            <label for="body">Escribe tu texto:</label>
        <br>
-            <textarea name="comentario" rows="10" cols="70"> </textarea>
+            <textarea name="body" rows="10" cols="70"> </textarea>
               
    </div>
    <br>

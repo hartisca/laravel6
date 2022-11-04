@@ -12,7 +12,10 @@ class posts extends Model
     protected $fillable = [
         'body',
         'latitude',
-        'longitude'     
+        'longitude',
+        'file_id',
+        'visibility_id',
+        'author_id',
         
     ];
 

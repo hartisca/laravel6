@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('body', 255);
             $table->unsignedBigInteger('file_id');
             $table->foreign('file_id')->references('id')->on('files');
-            $table->float('latitude');
-            $table->float('longitude');
-            $table->unsignedBigInteger('visibility_id');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->unsignedBigInteger('visibility_id')->nullable();
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
             $table->timestamps();

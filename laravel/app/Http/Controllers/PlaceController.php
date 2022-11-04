@@ -14,7 +14,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        return view("files.index", [
+        return view("places.index", [
             "files" => File::all()
         ]); 
     }
@@ -37,6 +37,7 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
+        
         // Validar fitxer
         $validatedData = $request->validate([
             'upload' => 'required|mimes:gif,jpeg,jpg,png|max:1024'
@@ -61,10 +62,12 @@ class FileController extends Controller
             $fullPath = \Storage::disk('public')->path($filePath);
             \Log::debug("File saved at {$fullPath}");
             // Desar dades a BD
+            
             $file = File::create([
                 'filepath' => $filePath,
                 'filesize' => $fileSize,
             ]);
+            
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)

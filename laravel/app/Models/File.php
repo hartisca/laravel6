@@ -18,14 +18,4 @@ class File extends Model
 
         return $this->belongsTo(Place::class);
     }
-    public function places(){
-
-        return $this->hasMany(Place::class);
-    }
-
-
-
-
-
-
 }

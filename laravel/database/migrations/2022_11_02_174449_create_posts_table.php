@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('body', 255);
-            $table->unsignedBigInteger('file_id');
-            $table->foreign('file_id')->references('id')->on('files');
+           
+            $table->string('body', 255)->nullable();
+            $table->unsignedBigInteger('file_id')->nullable();
+            $table->foreign('file_id')->references('id')->on('files')->onDelete('set null');
             $table->string('latitude');
             $table->string('longitude');
             $table->unsignedBigInteger('visibility_id')->nullable();
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

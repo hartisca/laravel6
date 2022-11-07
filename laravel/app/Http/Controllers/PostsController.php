@@ -43,18 +43,18 @@ class PostsController extends Controller
             video/x-ms-wm,video/x-ms-wmv,video/x-ms-asf,video/x-la-asf,video/x-msvideo,video/x-sgi-movie,video/quicktime,video/vnd.rn-realvideo,
             audio/vnd.rn-realmedia,application/x-shockwave-flash,application/octet-stream|max:2048'          
         ]);
-
-        
-
+ 
+       
+ 
         $upload = $request->file('upload');
         $fileName = $upload->getClientOriginalName();
         $fileSize = $upload->getSize();
         $latitude = $request->get('latitude');
         $longitude = $request->get('longitude');        
         $body = $request->get('body');
-
+ 
         \Log::debug("Storing file '{$fileName}' ($fileSize)...");
-        
+       
         // Pujar fitxer al disc dur
         $uploadName = time() . '_' . $fileName;
         $filePath = $upload->storeAs(
@@ -62,7 +62,7 @@ class PostsController extends Controller
             $uploadName ,   // Filename
             'public'        // Disk
         );
-
+ 
         if (\Storage::disk('public')->exists($filePath)) {
             \Log::debug("Local storage OK");
             $fullPath = \Storage::disk('public')->path($filePath);
@@ -72,7 +72,7 @@ class PostsController extends Controller
                 'filepath' => $filePath,
                 'filesize' => $fileSize,                
             ]);
-
+ 
             $post = posts::create([
                 'latitude'=> $latitude,
                 'longitude'=> $longitude,
@@ -82,15 +82,16 @@ class PostsController extends Controller
             ]);
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
-            return redirect()->route('files.show', $file) /////// FALTA LA REDIRECCIÓ AL POST!!!
-                ->with('success', 'File successfully saved');
+            return redirect()->route('posts.show', $post)
+                ->with('success', 'Post successfully saved');
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
-            return redirect()->route("files.create") ///////// AQUI TAMBE
-               ->with('error', 'ERROR uploading file');
+            return redirect()->route("posts.create")
+               ->with('error', 'ERROR creating the post');
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -112,9 +113,12 @@ class PostsController extends Controller
      * @param  \App\Models\posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function edit(posts $posts)
+    public function edit(posts $post)
     {
-        //
+        $file=File::find($post->file_id);
+        return view('posts.edit', [
+            'post'=>$post,
+            'file'=>$file]);
     }
 
     /**
@@ -124,10 +128,73 @@ class PostsController extends Controller
      * @param  \App\Models\posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, posts $posts)
+    public function update(Request $request, posts $post)
     {
-        //
+          // Validar fitxer
+          $validatedData = $request->validate([
+            'upload' => '|mimes:gif,jpeg,jpg,png,video/avi,video/mp4,video/3gpp,video/mpg,video/mpeg,video/x-mpeg,video/x-msvideo,
+            video/x-ms-wm,video/x-ms-wmv,video/x-ms-asf,video/x-la-asf,video/x-msvideo,video/x-sgi-movie,video/quicktime,video/vnd.rn-realvideo,
+            audio/vnd.rn-realmedia,application/x-shockwave-flash,application/octet-stream|max:2048'          
+        ]);
+       
+        $file=File::find($post->file_id);
+        $prevPic = $file->upload;
+ 
+        // Obtenir dades del fitxer
+ 
+        if ($request->hasFile('upload')){
+ 
+            $upload = $request->file('upload');
+            $fileName = $upload->getClientOriginalName();
+            $fileSize = $upload->getSize();                          
+           
+            \Log::debug("Storing file '{$fileName}' ($fileSize)...");
+ 
+            // Pujar fitxer al disc dur
+            $uploadName = time() . '_' . $fileName;
+            $filePath = $upload->storeAs(
+                'uploads',      // Path
+                $uploadName ,   // Filename
+                'public'        // Disk
+        );} else{
+            $filePath = $file->filepath;
+            $filesize = $file->filesize;
+        }      
+                   
+        if (\Storage::disk('public')->exists($filePath)) {
+            if($request->hasFile('upload')){                
+                \Log::debug("Local storage OK");
+                $fullPath = \Storage::disk('public')->path($filePath);
+                \Log::debug("File saved at {$fullPath}");
+ 
+                // Desar dades a BD
+                $file->filepath = $filePath;
+                $file->filesize = $fileSize;
+                $file->save();
+                \Log::debug("DB storage OK");
+                $post->latitude = $request->get('latitude');
+                $post->longitude = $request->get('longitude');
+                $post->body = $request->get('body');
+                $post->save();  
+ 
+                }
+                else{
+                    $post->latitude = $request->get('latitude');
+                    $post->longitude = $request->get('longitude');
+                    $post->body = $request->get('body');
+                    $post->save();
+                }
+                // Patró PRG amb missatge d'èxit
+                return redirect()->route('posts.show', $post)
+                    ->with('success', 'Post modified');
+ 
+            } else {
+                \Log::debug("Local storage FAILS");
+                // Patró PRG amb missatge d'error
+                return redirect()->route("posts.edit")
+                ->with('error', 'ERROR modifying post');}
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -135,8 +202,24 @@ class PostsController extends Controller
      * @param  \App\Models\posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(posts $posts)
+    public function destroy(posts $post)
     {
-        //
+       
+        if(is_null($post->file_id)){
+            $post->delete();
+            return redirect(route('posts.index'))->with('success', 'Post successfully deleted');
+ 
+ 
+        } else{
+            $file = File::findOrFail($post->file_id);
+            $filePath = $file->filepath;
+            if (\Storage::disk('public')->exists($filePath)) {
+                $file->delete();
+                $post->delete();
+                return redirect(route('posts.index'))->with('success', 'Post successfully deleted');
+            }  
+        }
+   
     }
 }
+

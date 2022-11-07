@@ -21,7 +21,7 @@ class posts extends Model
 
     public function file()
     {
-        return $this->hasOne(File::class);
+        return $this->belongsTo(File::class);
     }
 
     public function user()

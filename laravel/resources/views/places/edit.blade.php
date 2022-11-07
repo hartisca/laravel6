@@ -3,9 +3,11 @@
 @section('content')
 <table class="table">
     <thead>
-        <tr>
+        @if (is_null($file))
+            <img class="img-fluid" src="" alt="Image not found" />
+        @else
             <img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" />
-        </tr>
+        @endif
     </thead>
     <tbody>  
                                                               

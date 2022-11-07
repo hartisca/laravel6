@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisteredUserController extends Controller
 {
@@ -43,12 +44,14 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role_id' => 1, 
+            'role_id' => 1 
         ]);
 
-        event(new Registered($user));
 
+        event(new Registered($user)); //classe Registered not found
+        
         Auth::login($user);
+
         $request->user()->sendEmailVerificationNotification();
 
         return redirect(RouteServiceProvider::HOME);

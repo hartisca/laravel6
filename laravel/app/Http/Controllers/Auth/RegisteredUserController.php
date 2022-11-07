@@ -48,7 +48,7 @@ class RegisteredUserController extends Controller
         ]);
 
 
-        event(new RegistersUsers($user)); //classe Registered not found
+        event(new Registered($user)); //classe Registered not found
         
         Auth::login($user);
 

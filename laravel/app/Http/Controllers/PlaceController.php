@@ -183,7 +183,8 @@ class PlaceController extends Controller
             else {
                 \Log::debug("Local storage Fails");
                 //Patró PRG amb missatge d'error
-                return redirect()->route("places.edit");
+                return redirect()->route("places.edit")
+                    ->with('error', 'Error al modificar place');
             }
         
         }}
@@ -196,7 +197,26 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
-        //
+        if(is_null($place->file_id)){
+
+            $place->delete();
+            return redirect(route('places.index'))->with('succes', 'Place successfully deleted');
+        }
+        else {
+            $file =File::findOrFail($place->file_id);
+            $filePath = $file->filepath;
+            
+        if(\Storage::disk('public')->exists($filePath)){
+            $file->delete();
+            $place->delete();
+            return redirect(route('places.index'))
+                ->with('succes', 'Place sucessfully deleted');
+        }}
+
+
+
+
+        }
+       
     }
     
-}

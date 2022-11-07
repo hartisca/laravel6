@@ -17,8 +17,8 @@ return new class extends Migration
         
             $table->id();
             $table->string('description',255);
-            $table->unsignedBigInteger ('file_id');
-            $table->foreign('file_id')->references ('id')->on ('files')->cascadeOnDelete();
+            $table->unsignedBigInteger ('file_id')->nullable();
+            $table->foreign('file_id')->references ('id')->on ('files')->onDelete('set null');
             $table->float ('latitude',8,2);
             $table->float ('longitude',8,2);
             //$table->unsignedBigInteger ('category_id');

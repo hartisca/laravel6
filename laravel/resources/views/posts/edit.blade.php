@@ -4,11 +4,11 @@
 <table class="table">
     <thead>
         <tr>            
-        @if (file_exists($file))
-            <img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" />
-        @else
+        @if (is_null($file))
             <img class="img-fluid" src="" alt="Image not found" />
-        @endif            
+        @else
+            <img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" />
+        @endif        
         </tr>
     </thead>
     <tbody>                                                        

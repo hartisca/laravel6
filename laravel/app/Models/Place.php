@@ -12,21 +12,21 @@ class Place extends Model
     protected $fillable = [
         'latitude',
         'longitude',
-        'description'
-        
-
-        
-    ];
+        'description',
+        'file_id',
+        'visibility_id',
+        'author_id',
+            
+        ];
     
     public function file(){
 
-        return $this->hasOne(File::class);
+        return $this->belongsTo(File::class);
     }
-    public function user(){
 
+    public function user(){
         return $this->belongsTo(User::class, 'author_id');
     }
-
 
 
 

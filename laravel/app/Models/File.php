@@ -14,8 +14,9 @@ class File extends Model
         'filepath'
         
     ];
+   
     public function place(){
 
-        return $this->belongsTo(Place::class);
+        return $this->hasOne(Place::class);
     }
 }

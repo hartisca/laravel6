@@ -43,8 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function places(){
-
+    public function places()
+    {
         return $this->hasMany(Place::class);
     }
 

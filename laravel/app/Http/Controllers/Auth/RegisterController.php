@@ -1,74 +1,51 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\PlaceController;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller
-{
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-    use RegistersUsers;
+Route::get('/', function () {
+    return view('welcome');
+});
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
+require __DIR__.'/auth.php';
+Auth::routes();
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role_id' => 1, 
-        ]);
-    }
-}
+Route::get('/', function (Request $request) {
+    $message = 'Loading welcome page';
+    Log::info($message);
+    $request->session()->flash('info', $message);
+    return view('welcome');
+ });
+ 
+Auth::routes();
+
+Route::get('mail/test', [MailController::class, 'test']);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('files', FileController::class);
+
+Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
+
+Route::resource('places',PlaceController::class);

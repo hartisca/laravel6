@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\PlaceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +40,12 @@ Route::get('/', function (Request $request) {
  
 Auth::routes();
 
+Route::get('mail/test', [MailController::class, 'test']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('files', FileController::class);
 
-Route::resource('files', FileController::class)->middleware(['auth', 'role.any:2,3']);
+Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
 
-Route::resource('places', PlaceController::class);
+Route::resource('places',PlaceController::class);

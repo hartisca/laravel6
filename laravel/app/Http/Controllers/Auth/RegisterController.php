@@ -74,6 +74,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role_id'=> 1
         ]);
+<<<<<<< HEAD
+        
+=======
       
         event(new Registered($user)); //si aquestes dos linees no hi son , també funciona pk s'executen desde el registeredUserController
         Auth::login($user);  
@@ -84,5 +87,6 @@ class RegisterController extends Controller
     
     
     
+>>>>>>> c4d45255f89ee780ed984b57cccae78365cdbba3
     }
 }

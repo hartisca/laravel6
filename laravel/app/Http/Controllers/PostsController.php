@@ -115,7 +115,7 @@ class PostsController extends Controller
      */
     public function edit(posts $post)
     {
-        $file=File::find($post->file_id);
+        $file=File::find($post->file_id); //$file = $post->file fa el mateix pq tenim la relacio definida al model.
         return view('posts.edit', [
             'post'=>$post,
             'file'=>$file]);

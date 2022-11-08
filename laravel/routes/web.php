@@ -7,6 +7,8 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\PlaceController;
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,13 +44,30 @@ Auth::routes();
 
 Route::get('mail/test', [MailController::class, 'test']);
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+    })->middleware('auth')->name('verification.notice');
+ 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+
+ 
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
  
 Route::resource('files', FileController::class); 
 
 Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
 
-Route::resource('posts',PostsController::class);
+Route::resource('posts',PostsController::class);//afegir role:1
 
-Route::resource('places',PlaceController::class);
+Route::resource('places',PlaceController::class);//afegir role :1
 

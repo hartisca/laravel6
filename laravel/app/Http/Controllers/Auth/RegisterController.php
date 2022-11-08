@@ -74,19 +74,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role_id'=> 1
         ]);
-<<<<<<< HEAD
-        
-=======
       
-        event(new Registered($user)); //si aquestes dos linees no hi son , també funciona pk s'executen desde el registeredUserController
+        event(new Registered($user));
         Auth::login($user);  
 
-        $user->sendEmailVerificationNotification(); //torna a no enviar el mail
+        $user->sendEmailVerificationNotification(); 
 
         return $user;
     
-    
-    
->>>>>>> c4d45255f89ee780ed984b57cccae78365cdbba3
     }
 }

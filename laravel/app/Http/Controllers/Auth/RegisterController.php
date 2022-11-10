@@ -75,8 +75,7 @@ class RegisterController extends Controller
             'role_id'=> 1
         ]);
       
-        event(new Registered($user));
-        Auth::login($user);  
+        event(new Registered($user));        
 
         $user->sendEmailVerificationNotification(); 
 

@@ -28,3 +28,4 @@ class File extends Model
         return $this->hasOne(Place::class);
     }
 }
+//crear diskSave() i diskDelete() x reduir els cruds storage

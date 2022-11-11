@@ -74,12 +74,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role_id'=> 1
         ]);
+
       
         event(new Registered($user));        
 
         $user->sendEmailVerificationNotification(); 
 
-        return $user;
-    
     }
 }
+   
+

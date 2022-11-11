@@ -79,6 +79,7 @@ class RegisterController extends Controller
         event(new Registered($user));        
 
         $user->sendEmailVerificationNotification(); 
+        return $user;
 
     }
 }

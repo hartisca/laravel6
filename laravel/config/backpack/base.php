@@ -351,4 +351,10 @@ return [
     */
 
     'token_username' => env('BACKPACK_TOKEN_USERNAME', false),
+
+    'middleware_class' => [
+        App\Http\Middleware\CheckIfAdmin::class,
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
++       Backpack\Base\app\Http\Middleware\UseBackpackAuthGuardInsteadOfDefaultAuthGuard::class,
+    ],
 ];

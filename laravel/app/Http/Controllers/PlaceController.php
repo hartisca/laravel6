@@ -213,9 +213,6 @@ class PlaceController extends Controller
                 ->with('succes', 'Place sucessfully deleted');
         }}
 
-
-
-
         }
        
     }

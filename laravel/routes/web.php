@@ -42,8 +42,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('mail/test', [MailController::class, 'test']);
+
 Route::resource('files', FileController::class);
 
-Route::resource('files', FileController::class)->middleware(['auth', 'role.any:2,3']);
+//Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
 
 Route::resource('posts',PostsController::class);

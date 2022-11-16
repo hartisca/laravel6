@@ -142,8 +142,7 @@ class FileController extends Controller
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
-            return redirect()->route("files.edit")
-               ->with('error', 'ERROR uploading file');
+            
         }
     }
 

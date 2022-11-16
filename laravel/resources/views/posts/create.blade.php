@@ -13,9 +13,13 @@
             <label for="body">Comment: </label>
        <br>
             <textarea name="body" rows="6" cols="60" maxlength="255" placeholder="Deixa aqui el teu comentari..."></textarea>
+<<<<<<< HEAD
               
+=======
+             
+>>>>>>> 67012caf376bfb4eb41463277057951a2cf90b59
    </div>
    <br>
-   <button type="submit" class="btn btn-primary">Create</button>   
-   <button type="reset" class="btn btn-secondary">Reset</button>   
+   <button type="submit" class="btn btn-primary">Create</button>  
+   <button type="reset" class="btn btn-secondary">Reset</button>  
 </form>

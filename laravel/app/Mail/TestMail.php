@@ -54,6 +54,7 @@ class TestMail extends Mailable
         );
     }
 
+
     /**
      * Get the attachments for the message.
      *

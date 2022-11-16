@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
+
 
 class File extends Model
 {
@@ -18,8 +20,13 @@ class File extends Model
 
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->hasOne(Post::class);
     }
 
- 
+   
+    public function place(){
+
+        return $this->hasOne(Place::class);
+    }
 }
+//crear diskSave() i diskDelete() x reduir els cruds storage

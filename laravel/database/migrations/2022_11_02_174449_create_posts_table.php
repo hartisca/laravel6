@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
             
+=======
+           
+>>>>>>> 67012caf376bfb4eb41463277057951a2cf90b59
             $table->string('body', 255)->nullable();
             $table->unsignedBigInteger('file_id')->nullable();
             $table->foreign('file_id')->references('id')->on('files')->onDelete('set null');
@@ -27,6 +31,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

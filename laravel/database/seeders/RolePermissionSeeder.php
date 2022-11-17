@@ -34,12 +34,12 @@ class RolePermissionSeeder extends Seeder
         Permission::create(['name' => 'places.read']);
         Permission::create(['name' => 'places.delete']);
 
-        Permission::create(['name' => 'post.*']);
-        Permission::create(['name' => 'post.list']);
-        Permission::create(['name' => 'post.create']);
-        Permission::create(['name' => 'post.update']);
-        Permission::create(['name' => 'post.read']);
-        Permission::create(['name' => 'post.delete']);
+        Permission::create(['name' => 'posts.*']);
+        Permission::create(['name' => 'posts.list']);
+        Permission::create(['name' => 'posts.create']);
+        Permission::create(['name' => 'posts.update']);
+        Permission::create(['name' => 'posts.read']);
+        Permission::create(['name' => 'posts.delete']);
 
         $adminRole = Role::create(['name' => 'Admin']);
         $editorRole = Role::create(['name' => 'Editor']);

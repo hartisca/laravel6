@@ -43,11 +43,6 @@ Auth::routes();
 
 Route::get('mail/test', [MailController::class, 'test']);
 
-<<<<<<< HEAD
-Route::get('mail/test', [MailController::class, 'test']);
-
-Route::resource('files', FileController::class);
-=======
 Route::get('/email/verify', function () {
 
     return view('auth.verify-email');
@@ -66,14 +61,8 @@ Route::get('/email/verify', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
  
 Route::resource('files', FileController::class); 
->>>>>>> 67012caf376bfb4eb41463277057951a2cf90b59
-
-//Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
 
 Route::resource('posts',PostsController::class);
-<<<<<<< HEAD
-=======
 
 Route::resource('places',PlaceController::class);
 
->>>>>>> 67012caf376bfb4eb41463277057951a2cf90b59

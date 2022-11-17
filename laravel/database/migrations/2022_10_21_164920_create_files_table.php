@@ -14,12 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id(); 
-=======
 
-            $table->primary('id'); 
->>>>>>> 67012caf376bfb4eb41463277057951a2cf90b59
+            $table->id(); 
             $table->string('filepath');
             $table->integer('filesize');
             $table->timestamps();

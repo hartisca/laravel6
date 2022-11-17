@@ -59,5 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
+    public $guard_name = 'web';
+
 
 }

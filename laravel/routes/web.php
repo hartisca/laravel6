@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlaceController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -59,12 +59,10 @@ Route::get('/email/verify', function () {
     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
- 
-Route::resource('files', FileController::class); 
 
-Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
+Route::resource('files', FileController::class)->middleware(['auth', 'permission:files']);
 
-Route::resource('posts',PostsController::class);
+Route::resource('post', PostController::class)->middleware(['auth', 'permission:posts']);
 
-Route::resource('places',PlaceController::class);
+Route::resource('place', PlaceController::class)->middleware(['auth', 'permission:places']);
 

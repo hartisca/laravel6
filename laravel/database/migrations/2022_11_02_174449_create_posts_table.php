@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->unsignedBigInteger('visibility_id')->nullable();
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users');
+            $table->unsignedBigInteger('author_id')->nullable();
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

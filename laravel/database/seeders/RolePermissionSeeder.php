@@ -41,9 +41,9 @@ class RolePermissionSeeder extends Seeder
         Permission::create(['name' => 'post.read']);
         Permission::create(['name' => 'post.delete']);
 
-        $adminRole = Role::create(['name' => 'Admin']);
-        $editorRole = Role::create(['name' => 'Editor']);
-        $authorRole = Role::create(['name' => 'Author']);
+        $adminRole = Role::create(['name' => 'admin']);
+        $editorRole = Role::create(['name' => 'editor']);
+        $authorRole = Role::create(['name' => 'author']);
 
         $adminRole->givePermissionTo(['files.list',
         'files.read',

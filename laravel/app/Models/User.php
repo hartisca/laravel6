@@ -17,6 +17,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, CrudTrait, HasRoles;
 
+    public $guard_name = 'web';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -58,6 +60,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Place::class);
 
     }
-
+        
 
 }

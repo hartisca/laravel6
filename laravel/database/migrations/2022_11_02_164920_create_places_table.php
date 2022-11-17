@@ -23,8 +23,8 @@ return new class extends Migration
             $table->float ('longitude',8,2);
             //$table->unsignedBigInteger ('category_id');
             //$table->unsignedBigInteger ('visibility_id');
-            $table->unsignedBigInteger ('author_id');
-            $table->foreign('author_id')->references('id')->on ('users');
+            $table->unsignedBigInteger ('author_id')->nullable();
+            $table->foreign('author_id')->references('id')->on ('users')->onDelete('set null');
             $table-> timestamps ();
         });
     }

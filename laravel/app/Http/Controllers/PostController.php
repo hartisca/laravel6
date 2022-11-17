@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\posts;
+use App\Models\Post;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 
-class PostsController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class PostsController extends Controller
     public function index()
     {
         return view("posts.index", [
-            "posts" => posts::all()
+            "posts" => Post::all()
         ]); 
     }
 
@@ -75,7 +75,7 @@ class PostsController extends Controller
                 'filesize' => $fileSize,                
             ]);
  
-            $post = posts::create([
+            $post = Post::create([
                 'latitude'=> $latitude,
                 'longitude'=> $longitude,
                 'body'=> $body,
@@ -98,10 +98,10 @@ class PostsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\posts  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(posts $post)
+    public function show(Post $post)
     {
         $file=File::find($post->file_id);
         return view('posts.show', [
@@ -112,10 +112,10 @@ class PostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\posts  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(posts $post)
+    public function edit(Post $post)
     {
         $file=File::find($post->file_id);
         return view('posts.edit', [
@@ -127,10 +127,10 @@ class PostsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\posts  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, posts $post)
+    public function update(Request $request, Post $post)
     {
           // Validar fitxer
           $validatedData = $request->validate([
@@ -201,10 +201,10 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\posts  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(posts $post)
+    public function destroy(Post $post)
     {
        
         if(is_null($post->file_id)){

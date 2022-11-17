@@ -45,15 +45,15 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             
+            
         ]);
 
         $user->assignRole('author');
-
         event(new Registered($user)); //classe Registered not found
         
         Auth::login($user);
 
-        $request->user()->sendEmailVerificationNotification();
+        //$request->user()->sendEmailVerificationNotification();
 
         return redirect(RouteServiceProvider::HOME);
     }    

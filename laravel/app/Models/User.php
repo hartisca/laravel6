@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Contracts\Auth\Access\Authorizable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+
+    public $guard_name = 'web';
 
     /**
      * The attributes that are mass assignable.

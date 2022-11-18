@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\MailController;
+use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlaceController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,11 +35,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('mail/test', [MailController::class, 'test']);
 
-Route::resource('files', FileController::class)
-    ->middleware(['auth', 'role.any:1,2,3']);
+Route::resource('files', FileController::class);
+    
 
-Route::resource('posts', PostController::class)
-    ->middleware(['auth', 'role:1']);
+Route::resource('posts', PostController::class);
+    //->middleware(['auth','permission:posts']);
+    
 
 Route::resource('places', PlaceController::class)
-    ->middleware(['auth', 'role:1']);
+    ->middleware(['auth','permission:places']);
+    

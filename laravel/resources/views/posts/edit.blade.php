@@ -1,41 +1,33 @@
-@extends('layouts.app')
- 
-@section('content')
-<table class="table">
-    <thead>
-        <tr>            
-        @if (is_null($file))
-            <img class="img-fluid" src="" alt="Image not found" />
-        @else
-            <img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" />
-        @endif        
-        </tr>
-    </thead>
-    <tbody>                                                        
-        <form method="post" action="{{ route('posts.update', $post) }}" enctype="multipart/form-data">
-            @method('PUT')
-            @csrf
-    <div class="form-group">
-            <label for="upload">File:</label>
-            <input type="file" class="form-control" name="upload"/>
-        <br>
-            <label for="longitude">Longitude:</label>
-            <input type="text" class="form-control" name="longitude" value="{{ $post->longitude }}"/>
-        <br>
-            <label for="latitude">Latitude:</label>
-            <input type="text" class="form-control" name="latitude" value="{{ $post->latitude }}">
-    </div>
-    <div class="form-group">  
-                <label for="body">Comment: </label>
-                <br>                
-                <textarea name="body" rows="6" cols="60">{{ $post->body }} </textarea>
-    </div>
-    <div>
-        <br>
-        <button type="submit" class="btn btn-primary">Save</button>  
-        <button type="reset" class="btn btn-secondary">Reset</button>      
-    </div>    
-    </tbody>
-</table>
-                   
+@extends('layouts.box-app')
+
+@section('box-title')
+    {{ __('Post') . " " . $post->id }}
+@endsection
+
+@section('box-content')
+    <img class="img-fluid" src="{{ asset('storage/'.$file->filepath) }}" title="Image preview"/>
+    <form method="POST" action="{{ route('posts.update', $post) }}" enctype="multipart/form-data">
+        @csrf
+        @method("PUT")
+        <div class="form-group">
+            <label for="body">{{ _('Body') }}</label>
+            <textarea id="body" name="body" class="form-control">{{ $post->body }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="upload">{{ _('File') }}</label>
+            <input type="file" id="upload" name="upload" class="form-control" />
+        </div>
+        <div class="form-group">            
+                <label for="latitude">{{ _('Latitude') }}</label>
+                <input type="text" id="latitude" name="latitude" class="form-control"
+                    value="{{ $post->latitude }}"/>
+        </div>
+        <div class="form-group">            
+                <label for="longitude">{{ _('Longitude') }}</label>
+                <input type="text" id="longitude" name="longitude" class="form-control"
+                    value="{{ $post->longitude }}"/>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ _('Update') }}</button>
+        <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
+    </form>
 @endsection

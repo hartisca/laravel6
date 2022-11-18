@@ -5,21 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Place extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
-        'body',
+        'name',
+        'description',
         'file_id',
         'latitude',
         'longitude',
-        'author_id'
+        'author_id',
     ];
 
     public function file()
     {
-       return $this->belongsTo(File::class);
+        return $this->belongsTo(File::class);
     }
 
     public function user()

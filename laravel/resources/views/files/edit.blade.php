@@ -1,24 +1,19 @@
-@extends('layouts.app')
- 
-@section('content')
-<table class="table">
-    <thead>
-        <tr>
-            <img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" />
-        </tr>
-    </thead>
-    <tbody>                                                         
-        <form method="post" action="{{ route('files.update', $file) }}" enctype="multipart/form-data">
-            @method('PUT')
-            @csrf
-    <div class="form-group">
-        <label for="upload">File:</label>
-        <input type="file" class="form-control" name="upload"/>
-    </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Save</button>   
-        <button type="reset" class="btn btn-secondary">Reset</button>           
-    </tbody>
-</table>
-                   
+@extends('layouts.box-app')
+
+@section('box-title')
+    {{ __('File') . " " . $file->id }}
+@endsection
+
+@section('box-content')
+    <img class="img-fluid" src="{{ asset('storage/'.$file->filepath) }}" title="Image preview"/>
+    <form method="POST" action="{{ route('files.update', $file) }}" enctype="multipart/form-data">
+        @csrf
+        @method("PUT")
+        <div class="form-group">
+            <label for="upload">{{ _('File') }}:</label>
+            <input type="file" class="form-control" name="upload"/>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ _('Update') }}</button>
+        <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
+    </form>
 @endsection

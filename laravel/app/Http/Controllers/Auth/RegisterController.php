@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Events\Registered;
-
 
 class RegisterController extends Controller
 {
@@ -69,19 +66,16 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id'=> 1
+            'role_id'  => Role::AUTHOR,
         ]);
+        
+        event(new \Illuminate\Auth\Events\Registered($user));
 
-      
-        event(new Registered($user));        
-
-        $user->sendEmailVerificationNotification(); 
+        $user->sendEmailVerificationNotification();
+       
         return $user;
-
     }
 }
-   
-

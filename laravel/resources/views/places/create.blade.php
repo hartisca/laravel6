@@ -1,51 +1,35 @@
-@extends('layouts.app')
- 
-@section('content')
+@extends('layouts.box-app')
 
-           <div class="card">
-               <div class="card-header">{{ __('places') }}</div>
-               <div class="card-body">
-                   <table class="table">
-                       <thead>
-                           <tr>
-                               <td scope="col">ID</td>
-                               <td scope="col">Latitude</td>
-                               <td scope="col">Longitude</td>
-                               <td scope="col">Autor</td>
-                               <td scope="col">Created</td>
-                               <td scope="col">Updated</td>
-                               <td scope="col" colspan = 2>Actions</td>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           @foreach ($places as $place)
-                           <tr>
-                               <td><a href="{{ route('places.show',$place) }}">{{ $place->id }}</a></td>                               
-                               <td>{{ $place->latitude }}</td>
-                               <td>{{ $place->longitude }}</td>
-                               <td>{{ $place->author_id }}</td>
-                               <td>{{ $place->created_at }}</td>
-                               <td>{{ $place->updated_at }}</td>
-                               <td>                                   
-                                    <form action="{{route('places.edit', $place->id )}}">                                                      
-                                        <button type="sumbit" class="btn btn-primary">Edit</button>
-                                    </form>
-                               </td>
-                               <td>
-                                    <form method="POST" action="{{route('places.destroy', $place->id )}}"> 
-                                        @csrf
-                                        @method('DELETE')               
-                                        <button type="sumbit" class="btn btn-danger">Delete</button>
-                                    </form>
-                               </td>      
+@section('box-title')
+    {{ __('Add place') }}
+@endsection
 
-                           </tr>
-                           @endforeach
-                       </tbody>
-                   </table>
-                   
-               </div>
-           </div>
-           <a class="btn btn-primary" href="{{ route('places.create') }}" role="button">Add new place</a>
-      
+@section('box-content')
+    <form method="post" action="{{ route('places.store') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="name">{{ _('Name') }}</label>
+            <input type="text" id="name" name="name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="description">{{ _('Description') }}</label>
+            <textarea id="description" name="description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="upload">{{ _('File') }}</label>
+            <input type="file" id="upload" name="upload" class="form-control" />
+        </div>
+        <div class="form-group">            
+                <label for="latitude">{{ _('Latitude') }}</label>
+                <input type="text" id="latitude" name="latitude" class="form-control"
+                    value="41.2310371"/>
+        </div>
+        <div class="form-group">            
+            <label for="longitude">{{ _('Longitude') }}</label>
+            <input type="text" id="longitude" name="longitude" class="form-control"
+                    value="1.7282036"/>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
+        <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
+    </form>
 @endsection

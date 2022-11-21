@@ -9,30 +9,29 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class Post extends Model
 {
-    use HasFactory, CrudTrait;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use HasFactory;
 
     protected $fillable = [
         'body',
+        'file_id',
         'latitude',
         'longitude',
-        'file_id',
-        'visibility_id',
-        'author_id',
-        
+        'author_id'
     ];
 
     public function file()
     {
-        return $this->belongsTo(File::class);
+       return $this->belongsTo(File::class);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class, 'author_id');
     }
-
     public function author()
-   {
-       return $this->belongsTo(User::class);
-   }
+    {
+        return $this->belongsTo(User::class);
+    }
+ 
 }

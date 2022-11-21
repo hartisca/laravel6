@@ -1,25 +1,32 @@
-<form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
-   @csrf
-   <div class="form-group">
-            <label for="upload">File:</label>
-            <input type="file" class="form-control" name="upload"/>
-       <br>
-            <label for="Latitude">Latitude:</label>
-            <input type="text" class="form-control" name="latitude"/>
-       <br>
-            <label for="Longitude">Longitude:</label>
-            <input type="text" class="form-control" name="longitude"/>
-       <br>
-            <label for="body">Comment: </label>
-       <br>
-            <textarea name="body" rows="6" cols="60" maxlength="255" placeholder="Deixa aqui el teu comentari..."></textarea>
-<<<<<<< HEAD
-              
-=======
-             
->>>>>>> 67012caf376bfb4eb41463277057951a2cf90b59
-   </div>
-   <br>
-   <button type="submit" class="btn btn-primary">Create</button>  
-   <button type="reset" class="btn btn-secondary">Reset</button>  
-</form>
+@extends('layouts.box-app')
+
+@section('box-title')
+    {{ __('Add post') }}
+@endsection
+
+@section('box-content')
+    <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="body">{{ _('Body') }}</label>
+            <textarea id="body" name="body" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="upload">{{ _('File') }}</label>
+            <input type="file" id="upload" name="upload" class="form-control" />
+        </div>
+        <div class="form-group">            
+                <label for="latitude">{{ _('Latitude') }}</label>
+                <input type="text" id="latitude" name="latitude" class="form-control"
+                    value="41.2310371"/>
+        </div>
+        <div class="form-group">            
+            <label for="longitude">{{ _('Longitude') }}</label>
+            <input type="text" id="longitude" name="longitude" class="form-control"
+                    value="1.7282036"/>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
+        <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
+    </form>
+@endsection
+

@@ -1,51 +1,45 @@
-@extends('layouts.app')
- 
-@section('content')
+@extends('layouts.box-app')
 
-           <div class="card">
-               <div class="card-header">{{ __('places') }}</div>
-               <div class="card-body">
-                   <table class="table">
-                       <thead>
-                           <tr>
-                               <td scope="col">ID</td>
-                               <td scope="col">Latitude</td>
-                               <td scope="col">Longitude</td>
-                               <td scope="col">Autor</td>
-                               <td scope="col">Created</td>
-                               <td scope="col">Updated</td>
-                               <td scope="col" colspan = 2>Actions</td>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           @foreach ($places as $place)
-                           <tr>
-                               <td><a href="{{ route('places.show',$place) }}">{{ $place->id }}</a></td>                               
-                               <td>{{ $place->latitude }}</td>
-                               <td>{{ $place->longitude }}</td>
-                               <td>{{ $place->author_id }}</td>
-                               <td>{{ $place->created_at }}</td>
-                               <td>{{ $place->updated_at }}</td>
-                               <td>                                   
-                                    <form action="{{route('places.edit', $place->id )}}">                                                      
-                                        <button type="sumbit" class="btn btn-primary">Edit</button>
-                                    </form>
-                               </td>
-                               <td>
-                                    <form method="POST" action="{{route('places.destroy', $place->id )}}"> 
-                                        @csrf
-                                        @method('DELETE')               
-                                        <button type="sumbit" class="btn btn-danger">Delete</button>
-                                    </form>
-                               </td>      
+@section('box-title')
+    {{ __('Places') }}
+@endsection
 
-                           </tr>
-                           @endforeach
-                       </tbody>
-                   </table>
-                   
-               </div>
-           </div>
-           <a class="btn btn-primary" href="{{ route('places.create') }}" role="button">Add new place</a>
-      
+@section('box-content')
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <td scope="col">ID</td>
+                    <td scope="col">Name</td>
+                    <td scope="col">Description</td>
+                    <td scope="col">File</td>
+                    <td scope="col">Lat</td>
+                    <td scope="col">Lng</td>
+                    <td scope="col">Created</td>
+                    <td scope="col">Updated</td>
+                    <td scope="col"></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($places as $place)
+                <tr>
+                    <td>{{ $place->id }}</td>
+                    <td>{{ $place->name }}</td>
+                    <td>{{ substr($place->description,0,10) . "..." }}</td>
+                    <td>{{ $place->file_id }}</td>
+                    <td>{{ $place->latitude }}</td>
+                    <td>{{ $place->longitude }}</td>
+                    <td>{{ $place->created_at }}</td>
+                    <td>{{ $place->updated_at }}</td>
+                    <td>
+                        <a title="{{ _('View') }}" href="{{ route('places.show', $place) }}">👁️</a>
+                        <a title="{{ _('Edit') }}" href="{{ route('places.edit', $place) }}">📝</a>
+                        <a title="{{ _('Delete') }}" href="{{ route('places.show', [$place, 'delete' => 1]) }}">🗑️</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <a class="btn btn-primary" href="{{ route('places.create') }}" role="button">➕ {{ _('Add new place') }}</a>
 @endsection

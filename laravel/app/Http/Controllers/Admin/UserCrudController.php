@@ -10,7 +10,11 @@ class UserCrudController extends PM_UserCrudController
 {
    public function setup()
    {
-       parent::setup();
-       // Add your code here
+        parent::setup();
+        
+        $user = auth()->user();
+        if (!$user->hasRole('admin')){
+            CRUD::denyAccess('posts');
+        }
    }
 }

@@ -30,6 +30,7 @@ class PostCrudController extends CrudController
         CRUD::setRoute(config('backpack.base.route_prefix') . '/post');
         CRUD::setEntityNameStrings('post', 'posts');
         $this->crud->denyAccess(['create', 'delete', 'update']);
+
     }
 
     /**
@@ -40,14 +41,11 @@ class PostCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('author_id');
         CRUD::column('body');
-        CRUD::column('created_at');
         CRUD::column('file_id');
         CRUD::column('latitude');
         CRUD::column('longitude');
-        CRUD::column('updated_at');
-        CRUD::column('visibility_id');
+        CRUD::column('author_id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -66,12 +64,11 @@ class PostCrudController extends CrudController
     {
         CRUD::setValidation(PostRequest::class);
 
-        CRUD::field('author_id');
         CRUD::field('body');
         CRUD::field('file_id');
         CRUD::field('latitude');
         CRUD::field('longitude');
-        CRUD::field('visibility_id');
+        CRUD::field('author_id');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

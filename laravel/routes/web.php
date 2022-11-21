@@ -1,5 +1,5 @@
 <?php
- 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
@@ -7,6 +7,10 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlaceController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\LanguageController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,51 +22,30 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
-Route::get('/', function () {
-    return view('welcome');
-});
- 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
- 
-require __DIR__.'/auth.php';
-Auth::routes();
- 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
- 
+
 Route::get('/', function (Request $request) {
     $message = 'Loading welcome page';
     Log::info($message);
     $request->session()->flash('info', $message);
     return view('welcome');
- });
- 
+});
+
 Auth::routes();
-
-Route::get('mail/test', [MailController::class, 'test']);
-
-Route::get('/email/verify', function () {
-
-    return view('auth.verify-email');
-    })->middleware('auth')->name('verification.notice');
-    
- Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect('/home');
-    })->middleware(['auth', 'signed'])->name('verification.verify');
-  
- Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('message', 'Verification link sent!');
-    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+require __DIR__.'/email-verify.php';
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('files', FileController::class)->middleware(['auth', 'permission:files']);
+Route::get('mail/test', [MailController::class, 'test']);
 
-Route::resource('post', PostController::class)->middleware(['auth', 'permission:post']);
+Route::resource('files', FileController::class)
+   ->middleware(['auth', 'can:files.*']);
+    
 
-Route::resource('place', PlaceController::class)->middleware(['auth', 'permission:places']);
+Route::resource('posts', PostController::class)
+    ->middleware(['auth','can:posts.*']); 
+    
 
+Route::resource('places', PlaceController::class)
+    ->middleware(['auth','can:places.*']);
+
+Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'language']);

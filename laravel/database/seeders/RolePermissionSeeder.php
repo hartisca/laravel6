@@ -49,8 +49,8 @@ class RolePermissionSeeder extends Seeder
         'files.read',
         'places.list',
         'places.read',
-        'post.list',
-        'post.read']);
+        'posts.list',
+        'posts.read']);
 
         $editorRole->givePermissionTo(['files.read',
         'files.update',
@@ -58,13 +58,13 @@ class RolePermissionSeeder extends Seeder
         'places.read',
         'places.update',
         'places.list',
-        'post.read',
-        'post.update',
-        'post.list']);
+        'posts.read',
+        'posts.update',
+        'posts.list']);
         
         $authorRole->givePermissionTo(['files.*',
         'places.*',
-        'post.*']);
+        'posts.*']);
         
         $name  = config('admin.name');
         $admin = User::where('name', $name)->first();

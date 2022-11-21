@@ -7,6 +7,8 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlaceController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\LanguageController;
+
 
 
 
@@ -35,13 +37,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('mail/test', [MailController::class, 'test']);
 
-Route::resource('files', FileController::class);
+Route::resource('files', FileController::class)
+   ->middleware(['auth', 'can:files.*']);
     
 
-Route::resource('posts', PostController::class);
-    //->middleware(['auth','permission:posts']);
+Route::resource('posts', PostController::class)
+    ->middleware(['auth','can:posts.*']); 
     
 
 Route::resource('places', PlaceController::class)
-    ->middleware(['auth','permission:places']);
+    ->middleware(['auth','can:places.*']);
+
+Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'language']);
+
     

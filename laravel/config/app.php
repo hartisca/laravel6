@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ca',
 
     /*
     |--------------------------------------------------------------------------
@@ -94,7 +94,12 @@ return [
     | the language folders that are provided through your application.
     |
     */
-
+    
+    'available_locales' => [
+       'ca' => 'Català',
+       'es' => 'Castellano',
+       'en' => 'English',
+    ],
     'fallback_locale' => 'en',
 
     /*

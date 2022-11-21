@@ -50,8 +50,10 @@ class RolePermission extends Seeder
         'posts.*']);
 
         $editorRole->givePermissionTo(['files.*',
-        'places.*',
-        'posts.*']);
+        'places.list',
+        'places.show',
+        'posts.list',
+        'posts.show']);
         
         $authorRole->givePermissionTo(['files.*',
         'places.*',

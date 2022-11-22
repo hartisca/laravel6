@@ -51,14 +51,16 @@ class FileController extends Controller
         if ($ok) {
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)
-                ->with('success', __('validation.success',[
-                    'File successfully saved']));
+                ->with('success', __('messages.success',[
+                    'attribute' => __('messages.file'),
+                ]));
         } else {
             // Patró PRG amb missatge d'error
             return redirect()->route("files.create")
-                ->with('error', __('ERROR uploading file'));
-        }
-    }
+            ->with('error', __('messages.error',[
+                'attribute' => __('messages.file'),
+            ]));
+    }}
 
     /**
      * Display the specified resource.

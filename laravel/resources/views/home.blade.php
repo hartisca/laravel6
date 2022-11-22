@@ -10,10 +10,14 @@
             {{ session('status') }}
         </div>
     @endif
+<div class = "pruebacolor">
+
     <h2>{{ __('Resources') }}</h2>
     <ul>
         <li><a href="{{ url('/files') }}">{{ __('Files') }}</a></li>
         <li><a href="{{ url('/posts') }}">{{ __('Posts') }}</a></li>
         <li><a href="{{ url('/places') }}">{{ __('Places') }}</a></li>
     </ul>
+</div>
+
 @endsection

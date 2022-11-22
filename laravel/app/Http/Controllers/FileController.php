@@ -51,7 +51,8 @@ class FileController extends Controller
         if ($ok) {
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)
-                ->with('success', __('File successfully saved'));
+                ->with('success', __('validation.success',[
+                    'File successfully saved']));
         } else {
             // Patró PRG amb missatge d'error
             return redirect()->route("files.create")
@@ -109,12 +110,8 @@ class FileController extends Controller
                 ->with('success', __('File successfully saved'));
         } else {
             // Patró PRG amb missatge d'error
-<<<<<<< HEAD
-            
-=======
             return redirect()->route("files.edit")
                 ->with('error', __('ERROR uploading file'));
->>>>>>> d68094f534fcc6a50c0669d6e78ebe2c2524982b
         }
     }
 

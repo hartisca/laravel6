@@ -30,22 +30,28 @@
             <input type="text" id="longitude" name="longitude" class="form-control"
                     value="1.7282036"/>
         </div>
+        <div class="cont222">  <div>
+          
         <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
         <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
+        </div>
+        <div class="form-check form-switch">
+        
+        <label class="form-check-label" for="visibility">Mode privat</label>
+        <input class="form-check-input" type="checkbox" id="visibility" value="Private"/>
+        </div>
     </form>
 
 
+        <div class="rating">
   
-    <div class="rating">
-  
-  <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-  <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
-  <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-  <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-  <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-
-</div>
-
+            <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+            <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+            <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+            <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+            <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+        </div>
+    
 
 
 

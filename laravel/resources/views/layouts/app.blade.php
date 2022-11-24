@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+ 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+ 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+ 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-
+ 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -30,15 +30,15 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                
-
+ 
+              
+ 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+ 
                     </ul>
-
+ 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -48,7 +48,7 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
+ 
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -58,22 +58,22 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
-                                </a>                               
-
+                                </a>                              
+ 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
+ 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-                                    </form>                               
-
+                                    </form>                              
+ 
                                 </div>
                             </li>
-                            
+                           
                         @endguest
                     </ul>
                 </div>
@@ -86,12 +86,12 @@
             </main>
         @else
         <br>
-            <div class="container" bg>   
-            @include('flash') 
+            <div class="container" bg>  
+            @include('flash')
                 <div class="row">
                     <div class="col-md-2">    
                         <img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-High-Quality-Image.png" class="rounded-circle img-thumbnail" alt="Profile image" width="120px">
-            
+           
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link active" href="#"><i class="bi bi-people-fill"></i> Contactes</a>
@@ -109,7 +109,7 @@
                                 <a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-images"></i> Crear</a>
                                     <ul class="dropdown-menu dropdown-menu">
                                         <li><a class="nav-link" href="{{ route('posts.create') }}"><i class="bi bi-plus-square-fill"></i> Afegir Post</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('places.create') }}><i class="bi bi-plus-square-fill"></i> Afegir Place</a></li>                                        
+                                        <li><a class="dropdown-item" href="{{ route('places.create') }}"><i class="bi bi-plus-square-fill"></i> Afegir Place</a></li>                                        
                                     </ul>
                             </li>
                             <li class="nav-item">
@@ -138,3 +138,4 @@
     </div>
 </body>
 </html>
+

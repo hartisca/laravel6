@@ -17,18 +17,19 @@ form.addEventListener("submit", function( event ) {
    let validation = new Validator(data, rules)
    // Validate fields
    if (validation.passes()) {
-    // Allow submit form (do nothing)
-    console.log("Validation OK")
-} else {
-    // Get error messages
-    let errors = validation.errors.all()
-    console.log(errors)
-    // Show error messages
-    for(let inputName in errors) {
-        // ...
-    }
-    // Avoid submit
-    event.preventDefault()
-    return false
-}
+       // Allow submit form (do nothing)
+       console.log("Validation OK")
+   } else {
+       // Get error messages
+       let errors = validation.errors.all()
+       console.log(errors)
+       // Show error messages
+       for(let inputName in errors) {
+           var alert = document.querySelector('#error')
+           alert.innerHTML=("Error! No has introduït cap fitxer");
+       }
+       // Avoid submit
+       event.preventDefault()
+       return false
+   }
 })

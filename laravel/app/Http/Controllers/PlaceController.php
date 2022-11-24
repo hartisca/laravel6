@@ -91,10 +91,13 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
+        $file=File::find($place->file_id);
+        $user=User::find($place->author_id);
+
         return view("places.show", [
             'place'  => $place,
-            'file'   => $place->file,
-            'author' => $place->user,
+            'file'   => $place->$file,
+            'author' => $place->$user,
         ]);
     }
 

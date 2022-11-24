@@ -5,42 +5,34 @@
 @endsection
 
 @section('box-content')
-    <img class="img-fluid" src="{{ asset('storage/'.$file->filepath) }}" title="Image preview"/>
+<h5 class="title">{{ $user->name }}</h5><div class="rating ">
+
+
+<input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+<input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+<input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+<input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+<input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+
+</div>
+    <img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" title ="Image preview"/>
     <table class="table">
-            <tr>
-                <td><strong>ID<strong></td>
-                <td>{{ $place->id }}</td>
-            </tr>
-            <tr>
-                <td><strong>Name</strong></td>
-                <td>{{ $place->name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Description</strong></td>
-                <td>{{ $place->description }}</td>
-            </tr>
-            <tr>
-                <td><strong>Lat</strong></td>
-                <td>{{ $place->latitude }}</td>
-            </tr>
-            <tr>
-                <td><strong>Lng</strong></td>
-                <td>{{ $place->longitude }}</td>
-            </tr>
-            <tr>
-                <td><strong>Author</strong></td>
-                <td>{{ $author->name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Created</strong></td>
-                <td>{{ $place->created_at }}</td>
-            </tr>
-            <tr>
-                <td><strong>Updated</strong></td>
-                <td>{{ $place->updated_at }}</td>
-            </tr>
-        </tbody>
-    </table>
+<tr>
+    
+    
+    <td>{{ substr($place->description,0,10) . "..." }}</td>
+    <td>{{ $place->file_id }}</td>
+    <td>{{ $place->latitude }}</td>
+    <td>{{ $place->longitude }}</td>
+    <td>{{ $place->created_at }}</td>
+    <td>{{ $place->updated_at }}</td>
+    <td>
+        <a title="{{ _('View') }}" href="{{ route('places.show', $place) }}">👁️</a>
+        <a title="{{ _('Edit') }}" href="{{ route('places.edit', $place) }}">📝</a>
+        <a title="{{ _('Delete') }}" href="{{ route('places.show', [$place, 'delete' => 1]) }}">🗑️</a>
+    </td>
+</tr>
+</table>
 
     <!-- Buttons -->
     <div class="container" style="margin-bottom:20px">

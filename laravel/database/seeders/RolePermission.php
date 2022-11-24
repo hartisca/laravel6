@@ -30,6 +30,8 @@ class RolePermission extends Seeder
         Permission::create(['name' => 'files.update']);
         Permission::create(['name' => 'files.read']);
         Permission::create(['name' => 'files.delete']);
+        Permission::create(['name' => 'files.show']);
+
 
         Permission::create(['name' => 'places.*']);
         Permission::create(['name' => 'places.list']);
@@ -37,6 +39,8 @@ class RolePermission extends Seeder
         Permission::create(['name' => 'places.update']);
         Permission::create(['name' => 'places.read']);
         Permission::create(['name' => 'places.delete']);
+        Permission::create(['name' => 'places.show']);
+
 
         Permission::create(['name' => 'posts.*']);
         Permission::create(['name' => 'posts.list']);
@@ -44,6 +48,8 @@ class RolePermission extends Seeder
         Permission::create(['name' => 'posts.update']);
         Permission::create(['name' => 'posts.read']);
         Permission::create(['name' => 'posts.delete']);
+        Permission::create(['name' => 'posts.show']);
+
 
         $adminRole->givePermissionTo(['files.*',
         'places.*',

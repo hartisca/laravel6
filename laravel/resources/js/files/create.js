@@ -25,7 +25,8 @@ form.addEventListener("submit", function( event ) {
        console.log(errors)
        // Show error messages
        for(let inputName in errors) {
-           // ...
+           var alert = document.querySelector('#error')
+           alert.innerHTML=("Error! No has introduït cap fitxer");
        }
        // Avoid submit
        event.preventDefault()

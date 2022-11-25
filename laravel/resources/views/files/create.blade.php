@@ -14,7 +14,8 @@
             <input type="file" class="form-control" name="upload"/>
         </div>
         <br>
-        <div id="error"> </div>
+        <div id="error" class="alert alert-danger alert-dismissible fade"></div>
+        
         <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
         <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
     </form>

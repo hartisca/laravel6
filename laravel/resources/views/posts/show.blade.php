@@ -45,8 +45,7 @@
             @csrf
             @method("DELETE")
             <button id="destroy" type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">🗑️ {{ _('Delete') }}</button>
-        </form>
-        <a class="btn" href="{{ route('posts.index') }}" role="button">⬅️ {{ _('Back to list') }}</a>
+        </form>                  
     </div>
 
     <!-- Modal -->
@@ -64,7 +63,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button id="confirm" type="button" class="btn btn-primary">{{ _('Confirm') }}</button>
-                </div>
+                </div>                
             </div>
         </div>
     </div>

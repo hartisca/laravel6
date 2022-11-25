@@ -45,6 +45,7 @@ class PostController extends Controller
             'upload'    => 'required|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'  => 'required',
             'longitude' => 'required',
+            
         ]);
         
         // Obtenir dades del formulari
@@ -52,6 +53,7 @@ class PostController extends Controller
         $upload        = $request->file('upload');
         $latitude      = $request->get('latitude');
         $longitude     = $request->get('longitude');
+        $visibility    = $request->get('visibility');
 
         // Desar fitxer al disc i inserir dades a BD
         $file = new File();
@@ -66,6 +68,7 @@ class PostController extends Controller
                 'latitude'  => $latitude,
                 'longitude' => $longitude,
                 'author_id' => auth()->user()->id,
+                'visibility'=> $visibility,
             ]);
             Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
@@ -122,7 +125,8 @@ class PostController extends Controller
             'body'      => 'required',
             'upload'    => 'nullable|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'  => 'required',
-            'longitude' => 'required',
+            'longitude' => 'required',            
+            
         ]);
 
         // Obtenir dades del formulari
@@ -130,6 +134,8 @@ class PostController extends Controller
         $upload    = $request->file('upload');
         $latitude  = $request->get('latitude');
         $longitude = $request->get('longitude');
+        $visibility = $request->get('visibility');
+
 
         // Desar fitxer (opcional)
         if (is_null($upload) || $post->file->diskSave($upload)) {
@@ -138,6 +144,7 @@ class PostController extends Controller
             $post->body      = $body;
             $post->latitude  = $latitude;
             $post->longitude = $longitude;
+            $post->visibility = $visibility;
             $post->save();
             Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit

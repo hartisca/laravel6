@@ -33,7 +33,8 @@ Route::get('/', function (Request $request) {
 Auth::routes();
 require __DIR__.'/email-verify.php';
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home');
 
 Route::get('mail/test', [MailController::class, 'test']);
 
@@ -50,4 +51,5 @@ Route::resource('places', PlaceController::class)
 
 Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'language']);
 
-    
+Route::post('/places/{place}/fav', [App\Http\Controllers\PlaceController::class, 'fav'])
+    ->name('places.fav');

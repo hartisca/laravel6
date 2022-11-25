@@ -9,11 +9,13 @@
   <table class="table table-striped table-hover">
     <tbody>
 @foreach ($places as $place)
-      <a class="btn" href="{{ route('places.show', $place) }}" role="button">  
+       
       <div class="card mb-3">
         <div class="cont333">
-          <div>
-            <h5 class="card-title"> $user->name}}</h5>
+          <div class="cont444">
+            <img class="circular " src="https://www.cerdanyaecoresort.com/wp-content/uploads/paisatge-fira-cavall-cerdanya-ecoresort-pirineus-2-1024x460.jpg" title ="Image preview"/>
+ 
+            <h5 class="card-title"> {{$place->author->name }} </h5>
           </div>
           <div class="rating ">
             <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
@@ -23,7 +25,13 @@
             <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
           </div>
         </div>
-        <img class="img-fluid" src="https://www.cerdanyaecoresort.com/wp-content/uploads/paisatge-fira-cavall-cerdanya-ecoresort-pirineus-2-1024x460.jpg" title ="Image preview"/>
+        <a class="btn" href="{{ route('places.show', $place) }}" role="button"> 
+      @foreach ($files as $file)
+        @if ($file->id == $place->file_id)
+          <img class="img-fluid" src="{{asset("storage/{$file->filepath}") }}" title ="Image preview"/>
+        @endif
+      @endforeach
+        </a>
         <div class="d-flex mb-3">
         <div class="me-auto p-2"><h5>{{ $place->name }}</h5></div>
         <div class="p-2">
@@ -43,7 +51,7 @@
           <p class="card-text">{{ $place->latitude }}</p>
           <p class="card-text"><small class="text-muted">{{ $place->created_at }}.{{ $place->updated_at }}</small></p>
         </div>
-      </a>
+      
 @endforeach
     </tbody>
   </table>

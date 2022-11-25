@@ -38,7 +38,8 @@
         <div class="form-check form-switch">
         
         <label class="form-check-label" for="visibility">Mode privat</label>
-        <input class="form-check-input" type="checkbox" id="visibility" value="Private"/>
+        <input class="form-check-input" type="checkbox" name="visibility" id="visibility" value="1"/>
+        
         </div>
     </form>
 

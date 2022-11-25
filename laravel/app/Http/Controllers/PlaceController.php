@@ -8,8 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-use AppModels\likes;
-use App\Models\favorites;
+use App\Models\Fav;
 
 class PlaceController extends Controller
 {
@@ -21,7 +20,8 @@ class PlaceController extends Controller
     public function index()
     {
         return view("places.index", [
-            "places" => Place::all()
+            "places" => Place::all(),
+            "files"=> File::all(),
         ]);
     }
 
@@ -103,8 +103,8 @@ class PlaceController extends Controller
 
         return view("places.show", [
             'place'  => $place,
-            'file'   =>$place-> $file,
-            'author' =>$place->$user,
+            'file'   => $file,
+            'author' => $user,
         ]);
     }
 
@@ -188,4 +188,25 @@ class PlaceController extends Controller
             ->with('success', 'Place successfully deleted');
     }
 
+
+
+public function fav (Place $place)
+{
+// Obtenir dades del boto
+Log::debug("xxxxxxxbbbbbb DB...");
+
+$fav =Fav::create([
+    
+    'user_id'     => auth()->user()->id,
+    'place_id'    => $place->id
+]);
+
+        return redirect()->back()
+            ->with('success', __('Place successfully added to favorites'));
+    
+       
+    }
 }
+
+
+

@@ -26,7 +26,17 @@ p {
 .card{
     background-color: $color3;
 }
-
+.circular{
+    border-radius: 50%;
+    border: 2px solid black;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+.cont444{
+    display:flex;
+    align-items: center;
+}
 .tapisat{
     background-image: url('https://printedwallpapercompany.com/wp-content/uploads/nc/c/o/cool-blue-art-deco_1.jpg');
 }

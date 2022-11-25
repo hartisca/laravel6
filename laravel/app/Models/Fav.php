@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Favorites extends Model
+class Fav extends Model
 {
+
+    public $timestamps=false;
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
     
@@ -14,6 +16,9 @@ class Favorites extends Model
     const Private  = 1;
 
     protected $fillable = [
-        'name',
+        'user_id',
+        'place_id'
     ];
+
+
 }

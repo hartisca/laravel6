@@ -47,7 +47,12 @@
             <button id="destroy" type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">🗑️ {{ _('Delete') }}</button>
         </form>
         <a class="btn" href="{{ route('posts.index') }}" role="button">⬅️ {{ _('Back to list') }}</a>
+        <form method="POST" action="{{ route('posts.like', $post) }}" enctype="multipart/form-data">
+            @csrf
+            <button class="btn me-md-2" type="submit"><i class="bi bi-heart"></i></button>
+        </form>
     </div>
+    
 
     <!-- Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

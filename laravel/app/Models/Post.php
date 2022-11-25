@@ -15,7 +15,8 @@ class Post extends Model
         'file_id',
         'latitude',
         'longitude',
-        'author_id'
+        'author_id',
+        'visibility',
     ];
 
     public function file()

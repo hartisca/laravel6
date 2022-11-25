@@ -17,9 +17,20 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        return view("places.index", [
-            "places" => Place::all()
-        ]);
+        foreach (place::all() as $place) {
+            
+            [
+                'place'  => $place,
+                'file'   => $place->file,
+                'author' => $place->user,
+            ];
+            $file=file::find($place->file_id);
+            $user=user::find($place->author_id);
+        }
+       return view("places.index", [
+        "places" => Place::all()
+    ]);
+        
     }
 
     /**
@@ -91,6 +102,9 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
+        $file=file::find($place->file_id);
+        $user=user::find($place->author_id);
+
         return view("places.show", [
             'place'  => $place,
             'file'   => $place->file,

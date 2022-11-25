@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\File;
+use App\Models\User;
+use App\Models\Like;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -16,8 +19,10 @@ class PostController extends Controller
      */
     public function index()
     {
+        
         return view("posts.index", [
-            "posts" => Post::all()
+            "posts" => Post::all(),
+            "files" => File::all(),
         ]);
     }
 
@@ -45,6 +50,7 @@ class PostController extends Controller
             'upload'    => 'required|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'  => 'required',
             'longitude' => 'required',
+            'visibility' => 'required',
         ]);
         
         // Obtenir dades del formulari
@@ -52,6 +58,7 @@ class PostController extends Controller
         $upload        = $request->file('upload');
         $latitude      = $request->get('latitude');
         $longitude     = $request->get('longitude');
+        $visibility    = $request->get('visibility');
 
         // Desar fitxer al disc i inserir dades a BD
         $file = new File();
@@ -66,6 +73,7 @@ class PostController extends Controller
                 'latitude'  => $latitude,
                 'longitude' => $longitude,
                 'author_id' => auth()->user()->id,
+                'visibility' => $visibility
             ]);
             Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
@@ -86,10 +94,13 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $file=file::find($post->file_id);
+        $user=user::find($post->author_id);
+
         return view("posts.show", [
             'post'   => $post,
-            'file'   => $post->file,
-            'author' => $post->user,
+            'file'   => $file,
+            'author' => $user,                        
         ]);
     }
 
@@ -101,10 +112,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $file=file::find($post->file_id);
+        $user=user::find($post->author_id);
         return view("posts.edit", [
             'post'   => $post,
-            'file'   => $post->file,
-            'author' => $post->user,
+            'file'   => $file,
+            'author' => $user,
         ]);
     }
 
@@ -130,6 +143,8 @@ class PostController extends Controller
         $upload    = $request->file('upload');
         $latitude  = $request->get('latitude');
         $longitude = $request->get('longitude');
+        $visibility = $request->get('visibility');
+
 
         // Desar fitxer (opcional)
         if (is_null($upload) || $post->file->diskSave($upload)) {
@@ -138,6 +153,7 @@ class PostController extends Controller
             $post->body      = $body;
             $post->latitude  = $latitude;
             $post->longitude = $longitude;
+            $post->visibility = $visibility;
             $post->save();
             Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
@@ -165,5 +181,18 @@ class PostController extends Controller
         // Patró PRG amb missatge d'èxit
         return redirect()->route("posts.index")
             ->with('success', __('Post successfully deleted'));
+    }
+
+    public function like(Post $post)
+    {
+        
+        $user = Like::where('user_id', '=', Auth::user()->id)->get();
+
+        $like = Like::create([
+            'user_id' => $user,
+            'post_id' => $post->id,
+        ]);return redirect()->back();       
+               
+        
     }
 }

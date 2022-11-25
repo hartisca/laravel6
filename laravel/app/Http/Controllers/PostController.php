@@ -186,12 +186,14 @@ class PostController extends Controller
     public function like(Post $post)
     {
         
-        $user = Like::where('user_id', '=', Auth::user()->id)->get();
+        //$user = Like::where('user_id', '=', Auth::user()->id)->get();
 
+        $user = $post->user();
         $like = Like::create([
-            'user_id' => $user,
+            'user_id' => auth()->user()->id,
             'post_id' => $post->id,
-        ]);return redirect()->back();       
+        ]);
+        return redirect()->back();       
                
         
     }

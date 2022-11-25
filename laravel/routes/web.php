@@ -49,3 +49,7 @@ Route::resource('places', PlaceController::class)
     ->middleware(['auth','can:places.*']);
 
 Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'language']);
+
+Route::post('/posts/{post}/likes',[App\Http\Controllers\PostController::class,'like'])->name('posts.like');
+
+    

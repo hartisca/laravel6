@@ -1,9 +1,9 @@
 @extends('layouts.box-app')
-
+ 
 @section('box-title')
     {{ __('Add post') }}
 @endsection
-
+ 
 @section('box-content')
     <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
@@ -27,18 +27,18 @@
         </div>
         <div class="form-group">
             <label for="visibility">{{ _('Visibility') }}: </label>
-                
+               
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="radio" name="visibility" value="1" checked>
                     <label class="form-check-label" for="visibility">Public</label>
                 </div>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="radio" name="visibility" value="2">
-                    <label class="form-check-label" for="visibility">Private</label>
+                    <label class="form-check-label" for="visibility">Contacts</label>
                 </div>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="radio" name="visibility" value="3">
-                    <label class="form-check-label" for="visibility">Contacts</label>
+                    <label class="form-check-label" for="visibility">Private</label>
                 </div>          
         </div>
         <br>
@@ -46,4 +46,3 @@
         <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
     </form>
 @endsection
-

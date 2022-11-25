@@ -7,6 +7,33 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-.nav .flex-column{
-    background-color: white;
+
+.cont333{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.col-md-2 > li{        
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.p-2{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.cosas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerrr{
+    display: flex;
+    justify-content: space-between;
+}
+   

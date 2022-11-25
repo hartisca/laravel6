@@ -39,14 +39,24 @@
     </table>
 
     <!-- Buttons -->
-    <div class="container" style="margin-bottom:20px">
-        <a class="btn btn-warning" href="{{ route('posts.edit', $post) }}" role="button">📝 {{ _('Edit') }}</a>
-        <form id="form" method="POST" action="{{ route('posts.destroy', $post) }}" style="display: inline-block;">
-            @csrf
-            @method("DELETE")
-            <button id="destroy" type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">🗑️ {{ _('Delete') }}</button>
-        </form>                  
+    <div class="containerrr" style="margin-bottom:20px">
+        <div class="botonsesq">
+            <a class="btn btn-warning" href="{{ route('posts.edit', $post) }}" role="button">📝 {{ _('Edit') }}</a>
+            <form id="form" method="POST" action="{{ route('posts.destroy', $post) }}" style="display: inline-block;">
+                @csrf
+                @method("DELETE")
+                <button id="destroy" type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">🗑️ {{ _('Delete') }}</button>
+            </form>
+            <a class="btn" href="{{ route('posts.index') }}" role="button">⬅️ {{ _('Back to list') }}</a>
+        </div>
+        <div class ="botonsdreta">
+            <form method="POST" action="{{ route('posts.like', $post) }}" enctype="multipart/form-data">
+                @csrf
+                <button class="btn me-md-2" type="submit"><i class="bi bi-heart"></i></button>
+            </form>
+        </div>
     </div>
+    
 
     <!-- Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

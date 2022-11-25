@@ -1,43 +1,36 @@
 @extends('layouts.box-app')
 
 @section('box-title')
-    {{ __('Files') }}
+    {{ __('Posts') }}
 @endsection
 
 @section('box-content')
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <td scope="col">ID</td>
-                    <td scope="col">Body</td>
-                    <td scope="col">File</td>
-                    <td scope="col">Lat</td>
-                    <td scope="col">Lng</td>
-                    <td scope="col">Created</td>
-                    <td scope="col">Updated</td>
-                    <td scope="col"></td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($posts as $post)
-                <tr>
-                    <td>{{ $post->id }}</td>
-                    <td>{{ substr($post->body,0,10) . "..." }}</td>
-                    <td>{{ $post->file_id }}</td>
-                    <td>{{ $post->latitude }}</td>
-                    <td>{{ $post->longitude }}</td>
-                    <td>{{ $post->created_at }}</td>
-                    <td>{{ $post->updated_at }}</td>
-                    <td>
-                        <a title="{{ _('View') }}" href="{{ route('posts.show', $post) }}">👁️</a>
-                        <a title="{{ _('Edit') }}" href="{{ route('posts.edit', $post) }}">📝</a>
-                        <a title="{{ _('Delete') }}" href="{{ route('posts.show', [$post, 'delete' => 1]) }}">🗑️</a>
-                    </td>
-                </tr>
+<div class="table-responsive ">
+  <table class="table table-striped table-hover">
+    <tbody>
+        @foreach ($posts as $post)
+              <a class="btn" href="{{ route('posts.show', $post) }}" role="button">  
+                <div class="card mb-3">
+                  <div class="cont333">
+                    <div>
+                      <h5 class="card-title"> {{$post->author->name}}</h5>
+                    </div>
+                  </div>
+                @foreach ($files as $file)
+                  @if ($file->id == $post->file_id)
+                    <img class="img-fluid" src="{{asset("storage/{$file->filepath}") }}" title ="Image preview"/>
+                  @endif
                 @endforeach
-            </tbody>
-        </table>
-    </div>
-    <a class="btn btn-primary" href="{{ route('posts.create') }}" role="button">➕ {{ _('Add new post') }}</a>
+              </a>
+                <div class="cosas">
+                  <p class="card-text">{{ $post->body }}</p>
+                  <p class="card-text">{{ $post->latitude }}</p>
+                  <p class="card-text"><small class="text-muted">{{ $post->created_at }}.{{ $post->updated_at }}</small></p>
+                </div>
+              
+        @endforeach
+    </tbody>
+  </table>
+</div>
+    
 @endsection

@@ -20,5 +20,5 @@ class Fav extends Model
         'place_id'
     ];
 
-
+    protected $table = 'favorites';
 }

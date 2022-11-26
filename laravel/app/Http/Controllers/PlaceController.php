@@ -22,6 +22,8 @@ class PlaceController extends Controller
         return view("places.index", [
             "places" => Place::all(),
             "files"=> File::all(),
+            "favorites"=> Fav::all(),
+            
         ]);
     }
 
@@ -115,12 +117,17 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Place $place)
-    {
+    { 
+        if ($place->author_id == auth()->user()->id){
+        
         return view("places.edit", [
             'place'  => $place,
-            'file'   => $file,
-            'author' => $user,
-        ]);
+            'file'   =>$place->file,
+            'author' => $place->user,
+        ]);}
+        else{
+            return redirect()->back()
+            ->with('success', 'You cannot edit this content');}
     }
 
     /**
@@ -178,35 +185,44 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Place $place)
-    {
+    {   
+    if ($place->author_id == auth()->user()->id){
         // Eliminar place de BD
         $place->delete();
         // Eliminar fitxer associat del disc i BD
         $place->file->diskDelete();
         // Patró PRG amb missatge d'èxit
-        return redirect()->route("places.index")
-            ->with('success', 'Place successfully deleted');
+            return redirect()->route("places.index")
+                ->with('success', 'Place successfully deleted');}
+
+    else {
+            return redirect()->back()
+            ->with('success', 'You cannot delete this content');}
     }
 
 
 
 public function fav (Place $place)
 {
-// Obtenir dades del boto
-Log::debug("xxxxxxxbbbbbb DB...");
+    Fav::create([
+        'user_id'     => auth()->user()->id,
+        'place_id'    => $place->id
+    ]);
 
-$fav =Fav::create([
-    
-    'user_id'     => auth()->user()->id,
-    'place_id'    => $place->id
-]);
-
-        return redirect()->back()
-            ->with('success', __('Place successfully added to favorites'));
+    return redirect()->back()->with('success', __('Place successfully added to favorites'));
     
        
     }
+
+
+public function unfav (Place $place)
+{
+    // Eliminar place de BD
+  
+  
+    return redirect()->back()
+        ->with('success', 'Place  nooooooot successfully removed from favorites');
 }
 
 
-
+}

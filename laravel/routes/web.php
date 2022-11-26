@@ -53,3 +53,6 @@ Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class
 
 Route::post('/places/{place}/fav', [App\Http\Controllers\PlaceController::class, 'fav'])
     ->name('places.fav');
+    
+Route::post('/places/{place}/unfav', [App\Http\Controllers\PlaceController::class, 'unfav'])
+    ->name('places.unfav');

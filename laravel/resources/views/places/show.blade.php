@@ -1,8 +1,19 @@
 @extends('layouts.box-app')
 
 @section('box-title')
-    {{ __('Place') . " " . $place->id . ":   " . "favorited by " . $numFavs . " contacts"}} 
-    <!--si no ets el creador nomes veure el nom, no el place:id-->
+
+
+
+@if ($place->author_id == auth()->user()->id)
+
+{{ __('Place') }} {{$place->id . ":   " . "favorited by " . $numFavs . " contacts"}} 
+@else
+  {{"Posted by: ". $place->author->name }}
+@endif
+
+    <!--si no ets el creador nomes veure el nom, no el place:id
+      CONTADOR D FAVS NO OPERATIU, ara et conta els teus-->
+
 @endsection
 
 @section('box-content')

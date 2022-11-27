@@ -37,7 +37,7 @@ class Place extends Model
     
     public function favorited()
     {
-       return $this->belongsToMany(User::class, 'favorites');
+       return $this->belongsToMany(User::class, 'favorites')->withPivot('active', 'created_by');
     }
 
     public function visibility()

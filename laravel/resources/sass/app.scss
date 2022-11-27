@@ -22,7 +22,17 @@ p {
     line-height: 1.7em;
     color: #999;
 }
-
+.caixaFlex{
+    display:flex;
+    justify-content:space-between;
+}
+.dreta{
+order:2;
+display: inline-block;
+}
+.esquerra{
+    order:1;
+}
 .card{
     background-color: $color3;
 }
@@ -92,4 +102,5 @@ p {
     .rating:hover > input:checked ~ label:before{ 
     opacity: 0.4;
      }
-     //
+     
+ 

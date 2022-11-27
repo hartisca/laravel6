@@ -5,11 +5,14 @@
 @endsection
 
 @section('box-content')
+
+
 <div class="table-responsive ">
   <table class="table table-striped table-hover">
     <tbody>
 @foreach ($places as $place)
-       
+
+     
       <div class="card mb-3">
         <div class="cont333">
           <div class="cont444">
@@ -37,7 +40,7 @@
         <div class="p-2">
 
 
-      @if (Auth::User()->user_id == $place->place_id ) 
+      @if (!Auth::User()->user_id == $place->place_id ) 
          
          
         <form  method="POST" action="{{ route('places.unfav', $place) }}"  >
@@ -73,7 +76,12 @@
           <p class="card-text">{{ $place->latitude }}</p>
           <p class="card-text"><small class="text-muted">{{ $place->created_at }}.{{ $place->updated_at }}</small></p>
         </div>
-      
+
+
+
+        
+        
+
 @endforeach
     </tbody>
   </table>

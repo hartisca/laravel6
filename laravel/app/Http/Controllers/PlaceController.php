@@ -100,6 +100,9 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
+       
+
+
         $file=File::find($place->file_id);
         $user=User::find($place->author_id);
 
@@ -107,7 +110,7 @@ class PlaceController extends Controller
             'place'  => $place,
             'file'   => $file,
             'author' => $user,
-        ]);
+               ]);
     }
 
     /**
@@ -204,6 +207,7 @@ class PlaceController extends Controller
 
 public function fav (Place $place)
 {
+    
     Fav::create([
         'user_id'     => auth()->user()->id,
         'place_id'    => $place->id

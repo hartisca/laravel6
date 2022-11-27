@@ -30,17 +30,12 @@
             <input type="text" id="longitude" name="longitude" class="form-control"
                     value="1.7282036"/>
         </div>
-        <div class="cont222">  <div>
+        <div class="cont333">  <div>
           
         <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
         <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
         </div>
-        <div class="form-check form-switch">
-        
-        <label class="form-check-label" for="visibility">Mode privat</label>
-        <input class="form-check-input" type="checkbox" name="visibility" id="visibility" value="1"/>
-        
-        </div>
+   
     </form>
 
 
@@ -53,7 +48,21 @@
             <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
         </div>
     
-
+        <div class="form-group">
+        
+        <label  for="visibility"></label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="radio" name="visibility" value="1" checked>
+                <label class="form-check-label" for="visibility"> Public </label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="radio" name="visibility" value="2" checked>
+                <label class="form-check-label" for="visibility"> Contacts </label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="radio" name="visibility" value="3" checked>
+                <label class="form-check-label" for="visibility"> Private </label>
+            </div>
 
 
 @endsection

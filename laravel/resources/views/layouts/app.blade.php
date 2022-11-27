@@ -55,7 +55,13 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+              
+
+
+
+
+                        <li class="nav-item dropdown"  >
+                            
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>                              
@@ -73,7 +79,7 @@
  
                                 </div>
                             </li>
-                           
+</div> </div>
                         @endguest
                     </ul>
                 </div>
@@ -127,10 +133,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 ">
-                        <div class="card">
-                            <h1>Comentaris</h1>
-                        </div>
+                   
                     </div>
                 </div>
             </div>

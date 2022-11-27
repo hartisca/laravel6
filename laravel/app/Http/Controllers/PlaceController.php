@@ -104,6 +104,8 @@ class PlaceController extends Controller
         $file=File::find($place->file_id);
         $user=User::find($place->author_id);
         $logUser = auth()->user()->id;
+        $numFavs= count(Fav::where('user_id',$logUser)->where('place_id',$place->id)->get());
+
 
        if( Fav::where('user_id',$logUser)->where('place_id',$place->id)->count() > 0) {
         $fav = 1;
@@ -117,7 +119,8 @@ class PlaceController extends Controller
             'place'  => $place,
             'file'   => $file,
             'author' => $user,
-            'fav'    => $fav
+            'fav'    => $fav,
+            'numFavs'=> $numFavs
                ]);
     }
 

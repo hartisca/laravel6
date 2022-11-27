@@ -31,6 +31,7 @@
         <a class="btn" href="{{ route('places.show', $place) }}" role="button"> 
       @foreach ($files as $file)
         @if ($file->id == $place->file_id)
+        
           <img class="img-fluid" src="{{asset("storage/{$file->filepath}") }}" title ="Image preview"/>
         @endif
       @endforeach
@@ -39,15 +40,7 @@
         <div class="me-auto p-2"><h5>{{ $place->name }}</h5></div>
         <div class="p-2">
 
-
-      
-      
-      
-      
-      
      
-         
-         
    
           <form  method="POST" action="{{ route('places.fav', $place) }}"  >
                 @csrf
@@ -68,9 +61,18 @@
         </div>
         </div class="block">
 
-          <p class="card-text">{{ $place->description }}.{{$place->visibility}}</p>
-          <p class="card-text">{{ $place->latitude }}</p>
-          <p class="card-text"><small class="text-muted">{{ $place->created_at }}.{{ $place->updated_at }}</small></p>
+         
+            
+          <div class="col-md-12 col-lg-12">
+    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+      <div class="card-body p-4">
+      <p class="card-text">{{ $place->description }}
+</div></div></div>
+
+          <p class="card-text">Lat: {{ $place->latitude }} Long: {{ $place->longitude }}</p>
+          
+        
+          <p class="card-text"><small class="text-muted">{{ $place->created_at }}</small></p>
         </div>
 
 

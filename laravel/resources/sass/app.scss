@@ -22,19 +22,11 @@ p {
     line-height: 1.7em;
     color: #999;
 }
-.caixaFlex{
-    display:flex;
-    justify-content:space-between;
-}
-.dreta{
-order:2;
-display: inline-block;
-}
-.esquerra{
-    order:1;
-}
+
+
+
 .card{
-    background-color: $color3;
+    background-color: $secundary;
 }
 .circular{
     border-radius: 50%;
@@ -59,17 +51,12 @@ display: inline-block;
     justify-content:space-between;
     align-items:center;
 }
-.cont222{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
 
 .rating {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    background-color: $color3;
+    background-color: $secundary;
     }
     
     .rating > input{

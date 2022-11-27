@@ -1,12 +1,20 @@
 // Load our customized validationjs library
 import Validator from '../validator'
  
+
+
 // Submit form ONLY when validation is OK
 const form = document.getElementById("create")
  
 form.addEventListener("submit", function( event ) {
    // Reset errors messages
-   // ...
+   document.querySelector('#error').innerHTML = "";
+   document.querySelector('#error').classList.remove('show');
+
+
+
+
+
    // Create validation
    let data = {
        "upload": document.getElementsByName("upload")[0].value,
@@ -24,10 +32,22 @@ form.addEventListener("submit", function( event ) {
        let errors = validation.errors.all()
        console.log(errors)
        // Show error messages
+      document.querySelector('error').classList.add('show'); 
        for(let inputName in errors) {
-           var alert = document.querySelector('#error')
-           alert.innerHTML=("Error! No has introduït cap fitxer");
-       }
+
+    if(currentLocale == 'ca'){
+        document.querySelector('#error').innerHTML = 'El camp' + inputName + 'és obligatori.';
+    }
+    if(currentLocale == 'es'){
+        document.querySelector('#error').innerHTML = 'El campo' + inputName + 'es obligatori.';
+    }
+    if(currentLocale == 'en'){
+        document.querySelector('#error').innerHTML = 'The field' + inputName + 'is needed.';
+    }
+
+
+   
+}
        // Avoid submit
        event.preventDefault()
        return false

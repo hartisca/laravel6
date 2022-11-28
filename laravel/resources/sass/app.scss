@@ -7,8 +7,74 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-//una font (poppins)
+
+//font s
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Audiowide";
+@import "https://fonts.googleapis.com/css?family=Cinzel|Fauna+One";
+
+.fontTitol {
+  font-family: 'Fauna One', serif;
+  font-size: 16px;  
+}
+
+.fontGuay {
+  font-family: "Audiowide", sans-serif;
+}
+.img-fluid{
+    border:black 3px solid;
+}
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+//menu esquerra
+.menu > ul > li{        
+    padding: 5px;
+    margin-top: 40px;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #95ECB0;;
+}
+
+.menu .nom{
+    color: white;
+    
+}
+
+.menu > ul > li:hover {        
+    background-color: rgb(216, 215, 214);
+    font-size: 1.2em;
+}
+
+.fons{
+    background-color: #95ECB0;
+}
+
+.cont333 > .cont444 > h5 > .card-title{
+    color: white;
+}
+
+.col-md-2 > .card {
+    background-color: #95ECB0;
+   
+}
+
+.card .info{
+    background-color: rgb(236, 233, 233);
+    border-radius: 5px;
+    color: black;
+    
+}
+
+.card > .shadow-0 > .border{
+    display:flex;
+    align-items: center;
+}
+
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -42,9 +108,7 @@ p {
     display:flex;
     align-items: center;
 }
-.tapisat{
-    background-image: url('https://printedwallpapercompany.com/wp-content/uploads/nc/c/o/cool-blue-art-deco_1.jpg');
-}
+
 //star voting
 .cont333{
     display:flex;

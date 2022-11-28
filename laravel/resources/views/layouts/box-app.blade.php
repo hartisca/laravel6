@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" bg>    
-    <div class="row">
+<div class="container" bg> 
+    
+    <div class="row ">
         <div class="col-md-2">    
             <img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-High-Quality-Image.png" class="rounded-circle img-thumbnail" alt="Profile image" width="120px">
  
@@ -37,11 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2 ">
-            <div class="card">
-                <h1>Comentaris</h1>
-            </div>
-        </div>
+        
     </div>
 </div>
 @endsection

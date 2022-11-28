@@ -7,13 +7,106 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+//una font (poppins)
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+
+.cont333{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+//menu esquerra
+.menu > ul > li{        
+    padding: 5px;
+    margin-top: 40px;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #95ECB0;;
+}
+
+.menu .nom{
+    color: white;
+}
+
+.menu > ul > li:hover {        
+    background-color: rgb(216, 215, 214);
+    font-size: 1.2em;
+}
+
+.fons{
+    background-color: #95ECB0;
+}   
+
+.col-md-2 > .card {
+    background-color: #95ECB0;
+   
+}
+
+.card .info{
+    background-color: rgb(236, 233, 233);
+    border-radius: 5px;
+    color: black;
+    
+}
+
+.card > .shadow-0 > .border{
+    display:flex;
+    align-items: center;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerrr{
+    display: flex;
+    justify-content: space-between;
+}
+
+.img-fluid{
+    border: 2px solid black;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: $color3;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: black;
+}
+
+.card{
+    background-color: $color3;
+}
+.circular{
+    border-radius: 50%;
+    border: 2px solid black;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.cont444{
+    display:flex;
+    align-items: center;
+}
 
 .rating {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    
+    background-color: $color3;
     }
     
     .rating > input{
@@ -21,18 +114,18 @@
     }
     
     .rating > label {
-    position: relative;
-    width: 1.1em;
-    font-size: 2vw;
-    color: #FFD700;
-    cursor: pointer;
-    }
+        position: relative;
+        width: 1.1em;
+        font-size: 2vw;
+        color: #FFD700;
+        cursor: pointer;
+        }
     
     .rating > label::before{
-    content: "\2605";
-    position: absolute;
-    opacity: 0;
-    }
+        content: "\2605";
+        position: absolute;
+        opacity: 0;
+        }
     
     .rating > label:hover:before,
     .rating > label:hover ~ label:before {
@@ -46,25 +139,7 @@
     .rating:hover > input:checked ~ label:before{ 
     opacity: 0.4;
      }
-     //
-
-   .cont333{
-       display: flex;
-       justify-content: space-between;
-       align-items: center;
-   }
    
-    .col-md-2 > li{        
-        padding: 5px;
-        margin-top: 10px;
-    }
-
-    .p-2{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
     .cosas{
         display: flex;
         justify-content: center;

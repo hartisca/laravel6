@@ -41,11 +41,11 @@ class PostCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('body')->label(__('fields.body'));;
-        CRUD::column('file_id')->label(__('fields.file_id'));;
-        CRUD::column('latitude')->label(__('fields.latitude'));;
-        CRUD::column('longitude')->label(__('fields.longitude'));;
-        CRUD::column('author_id')->label(__('fields.author_id'));;
+        CRUD::column('body')->label(__('fields.body'));
+        CRUD::column('file_id')->label(__('fields.file_id'));
+        CRUD::column('latitude')->label(__('fields.latitude'));
+        CRUD::column('longitude')->label(__('fields.longitude'));
+        CRUD::column('author_id')->label(__('fields.author_id'));
 
 
         /**

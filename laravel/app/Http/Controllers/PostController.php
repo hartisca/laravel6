@@ -9,6 +9,7 @@ use App\Models\Like;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -19,7 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        
+            
         return view("posts.index", [
             "posts" => Post::all(),
             "files" => File::all(),
@@ -78,11 +79,15 @@ class PostController extends Controller
             Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
             return redirect()->route('posts.show', $post)
-                ->with('success', __('Post successfully saved'));
+                ->with('success', __('messages.success',[
+                    'attribute' => __('messages.Post'),
+            ]));
         } else {
             // Patró PRG amb missatge d'error
             return redirect()->route("posts.create")
-                ->with('error', __('ERROR Uploading file'));
+                ->with('error', __('messages.error',[
+                    'attribute' => __('messages.post'),
+            ]));
         }
     }
 
@@ -94,15 +99,28 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $file=file::find($post->file_id);
-        $user=user::find($post->author_id);
+        $file = file::find($post->file_id);
+        $user = user::find($post->author_id);        
+        $logUser = auth()->user()->id;
 
+        //per retornar boleá al show
+        if(Like::where('user_id', $logUser)->where('post_id', $post->id)->count() > 0) {
+            $like = 1;
+        } else{
+            $like = 0;
+        }
+        //comptador de likes
+        $numlikes = Like::where('post_id', $post->id)->count();
+        
         return view("posts.show", [
             'post'   => $post,
             'file'   => $file,
-            'author' => $user,                        
+            'author' => $user,  
+            'like' => $like,   
+            'numlikes' => $numlikes                    
         ]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -135,7 +153,8 @@ class PostController extends Controller
             'body'      => 'required',
             'upload'    => 'nullable|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'  => 'required',
-            'longitude' => 'required',
+            'longitude' => 'required',            
+            
         ]);
 
         // Obtenir dades del formulari
@@ -158,11 +177,15 @@ class PostController extends Controller
             Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
             return redirect()->route('posts.show', $post)
-                ->with('success', __('Post successfully saved'));
+            ->with('success', __('messages.success',[
+                'attribute' => __('messages.Post'),
+        ]));
         } else {
             // Patró PRG amb missatge d'error
             return redirect()->route("posts.edit")
-                ->with('error', __('ERROR Uploading file'));
+            ->with('error', __('messages.error',[
+                'attribute' => __('messages.post'),
+            ]));
         }
     }
 
@@ -172,27 +195,45 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
+
+    
     public function destroy(Post $post)
-    {
-        // Eliminar post de BD
-        $post->delete();
-        // Eliminar fitxer associat del disc i BD
-        $post->file->diskDelete();
-        // Patró PRG amb missatge d'èxit
-        return redirect()->route("posts.index")
-            ->with('success', __('Post successfully deleted'));
+    {   
+        
+        if ($post->author_id !== auth()->user()->id) {
+
+            return redirect()->route("posts.index")
+            ->with('error', __('messages.error2'));
+        }else{
+            // Delete post.
+            // Eliminar post de BD
+            $post->delete();
+            // Eliminar fitxer associat del disc i BD
+            $post->file->diskDelete();
+            // Patró PRG amb missatge d'èxit
+            return redirect()->route("posts.index")
+                ->with('success', __('messages.successD'));
+        }        
     }
 
     public function like(Post $post)
     {
-        
-        $user = Like::where('user_id', '=', Auth::user()->id)->get();
 
+        $user = $post->user();
         $like = Like::create([
-            'user_id' => $user,
+            'user_id' => auth()->user()->id,
             'post_id' => $post->id,
-        ]);return redirect()->back();       
-               
+        ]);
+        return redirect()->back();           
         
+    }
+
+    public function unlike(Post $post)
+    {
+        
+        $logUser = auth()->user()->id;
+        $like = Like::where('user_id', $logUser)->where('post_id', $post->id);
+        $like->delete();
+        return redirect()->back(); 
     }
 }

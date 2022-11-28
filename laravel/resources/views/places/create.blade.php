@@ -3,8 +3,9 @@
 @section('box-title')
     {{ __('Add place') }}
 @endsection
-
+ 
 @section('box-content')
+
     <form method="post" action="{{ route('places.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -29,7 +30,39 @@
             <input type="text" id="longitude" name="longitude" class="form-control"
                     value="1.7282036"/>
         </div>
+        <div class="cont333">  <div>
+          
         <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
         <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
+        </div>
+   
     </form>
+
+
+        <div class="rating">
+  
+            <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+            <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+            <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+            <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+            <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+        </div>
+    
+        <div class="form-group">
+        
+        <label  for="visibility"></label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="radio" name="visibility" value="1" checked>
+                <label class="form-check-label" for="visibility"> Public </label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="radio" name="visibility" value="2" checked>
+                <label class="form-check-label" for="visibility"> Contacts </label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="radio" name="visibility" value="3" checked>
+                <label class="form-check-label" for="visibility"> Private </label>
+            </div>
+
+
 @endsection

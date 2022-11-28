@@ -6,19 +6,20 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
-<<<<<<< HEAD
 
-=======
- 
->>>>>>> a7559ad133f0c194bd8d530cd590d04f6d56d6ea
 .bg-colorp{
     background-color: #4B8AA3;
 }
-.bg-colors{
-    background-color: #4B8AA3;
-}
-<<<<<<< HEAD
+
+$color3: #25599D;
+
+$theme-colors: (
+    'primary':#25599D,
+    'secundary':#b0e9dc,
+    'success':#29c409,
+    'info':#25599D,
+    'warning':#7f9600,
+    'danger': #e73390,
+);
 
 
-=======
->>>>>>> a7559ad133f0c194bd8d530cd590d04f6d56d6ea

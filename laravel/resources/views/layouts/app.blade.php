@@ -17,7 +17,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>    
+<body class="tapisat">    
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class = "lang-switcher">            
@@ -29,9 +29,7 @@
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>
- 
-              
+                </button>             
  
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -89,15 +87,14 @@
             <div class="container" bg>  
             @include('flash')
             
-                <div class="row">
+                <div class="row ">
                     <div class="col-md-2">    
-                        
+                    <div class="menu sticky-top">   
                         <img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-High-Quality-Image.png" class="rounded-circle img-thumbnail" alt="Profile image" width="120px">
                         
                         <div class="nom">{{ Auth::user()->name }}</div>
-                        <br>
-                        
-                        <ul class="nav flex-column">
+                        <br>                        
+                        <ul class="nav flex-column ">
                             <li class="nav-item">
                                 <a class="dropdown-item" href="#"><i class="bi bi-people-fill"></i> Contactes</a>
                             </li>
@@ -121,7 +118,7 @@
                                 <a class="dropdown-item" href="#"><i class="bi bi-search"></i> Filtrar</a>
                             </li>
                         </ul>
-                        
+                    </div>    
                         
                     </div>
                     <div class="col-md-8 ">
@@ -133,12 +130,7 @@
                                 @yield('box-content')
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 ">
-                        <div class="card">
-                            <h1>Comentaris</h1>
-                        </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>   
 

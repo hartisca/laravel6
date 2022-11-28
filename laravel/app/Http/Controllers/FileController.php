@@ -52,7 +52,7 @@ class FileController extends Controller
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)
                 ->with('success', __('messages.success',[
-                    'attribute' => __('messages.file'),
+                    'attribute' => __('messages.File'),
                 ]));
         } else {
             // Patró PRG amb missatge d'error

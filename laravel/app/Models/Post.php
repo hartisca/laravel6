@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
+
 class Post extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -15,7 +17,8 @@ class Post extends Model
         'file_id',
         'latitude',
         'longitude',
-        'author_id'
+        'author_id',
+        'visibility',        
     ];
 
     public function file()
@@ -35,5 +38,6 @@ class Post extends Model
     {
        return $this->belongsToMany(User::class, 'likes');
     }
-
+    
+   
 }

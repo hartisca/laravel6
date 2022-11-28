@@ -13,10 +13,19 @@ form.addEventListener("submit", function( event ) {
      // Create validation
 
    let data = {
-       "upload": document.getElementsByName("upload")[0].value,
+        "upload": document.getElementsByName("upload")[0].value,
+        "body": document.getElementsByName("body")[0].value,
+        "latitude": document.getElementsByName("latitude")[0].value,
+        "longitude": document.getElementsByName("longitude")[0].value,
+
    }
    let rules = {
-       "upload": "required",
+        "body": "required",
+        "latitude": "required",
+        "longitude": "required",
+        "upload": "required",
+
+
    }
    let validation = new Validator(data, rules)
    // Validate fields
@@ -30,11 +39,12 @@ form.addEventListener("submit", function( event ) {
        // Show error messages
        document.querySelector('#error').classList.add('show');
        for(let inputName in errors) {
+        
             if(currentLocale == 'ca'){
                document.querySelector('#error').innerHTML = 'El camp ' + inputName + ' és obligatori.';
             }
             if(currentLocale == 'es'){
-            document.querySelector('#error').innerHTML = 'El campo ' + inputName + ' es obligatorio.';
+                document.querySelector('#error').innerHTML = 'El campo ' + inputName + ' es obligatorio.';
             }
             if(currentLocale == 'en'){
                 document.querySelector('#error').innerHTML = 'The field ' + inputName + ' is needed.';

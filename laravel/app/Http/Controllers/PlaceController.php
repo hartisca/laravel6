@@ -17,12 +17,12 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( )
     {
+        
         return view("places.index", [
             "places" => Place::all(),
             "files"=> File::all(),
-            "favorites"=> Fav::all(),
             
         ]);
     }
@@ -99,18 +99,28 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Place $place)
-    {
-       
-
-
+    {   
         $file=File::find($place->file_id);
         $user=User::find($place->author_id);
+        $logUser = auth()->user()->id;
+        $numFavs= count(Fav::where('user_id',$logUser)->where('place_id',$place->id)->get());
+
+       if( Fav::where('user_id',$logUser)->where('place_id',$place->id)->count() > 0) {
+        $fav = 1;
+       }
+       else{
+        $fav = 0 ;
+    
+       }
 
         return view("places.show", [
             'place'  => $place,
             'file'   => $file,
             'author' => $user,
-               ]);
+            'fav'    => $fav,
+            'numFavs'=> $numFavs,
+            
+           ]);
     }
 
     /**
@@ -222,10 +232,13 @@ public function fav (Place $place)
 public function unfav (Place $place)
 {
     // Eliminar place de BD
-  
-  
+    $logUser = auth()->user()->id;
+    $fav = Fav::where('user_id',$logUser)->where('place_id',$place->id);
+    $fav->delete();
+    
+
     return redirect()->back()
-        ->with('success', 'Place  nooooooot successfully removed from favorites');
+        ->with('success', 'Place successfully removed from favorites');
 }
 
 

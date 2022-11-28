@@ -10,9 +10,72 @@
 //una font (poppins)
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+
+.cont333{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+//menu esquerra
+.menu > ul > li{        
+    padding: 5px;
+    margin-top: 40px;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #95ECB0;;
+}
+
+.menu .nom{
+    color: white;
+}
+
+.menu > ul > li:hover {        
+    background-color: rgb(216, 215, 214);
+    font-size: 1.2em;
+}
+
+.fons{
+    background-color: #95ECB0;
+}   
+
+.col-md-2 > .card {
+    background-color: #95ECB0;
+   
+}
+
+.card .info{
+    background-color: rgb(236, 233, 233);
+    border-radius: 5px;
+    color: black;
+    
+}
+
+.card > .shadow-0 > .border{
+    display:flex;
+    align-items: center;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerrr{
+    display: flex;
+    justify-content: space-between;
+}
+
+.img-fluid{
+    border: 2px solid black;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    background: $color3;
 }
 
 p {
@@ -20,19 +83,11 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
+
     color: #999;
 }
-.caixaFlex{
-    display:flex;
-    justify-content:space-between;
-}
-.dreta{
-order:2;
-display: inline-block;
-}
-.esquerra{
-    order:1;
-}
+
+
 .card{
     background-color: $color3;
 }
@@ -43,27 +98,11 @@ display: inline-block;
     height: 50px;
     display: inline-block;
 }
-.block{
-    display:block;
-}
 .cont444{
     display:flex;
     align-items: center;
 }
-.tapisat{
-    background-image: url('https://printedwallpapercompany.com/wp-content/uploads/nc/c/o/cool-blue-art-deco_1.jpg');
-}
-//star voting
-.cont333{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-.cont222{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+
 
 .rating {
     display: flex;
@@ -77,18 +116,18 @@ display: inline-block;
     }
     
     .rating > label {
-    position: relative;
-    width: 1.1em;
-    font-size: 2vw;
-    color: #FFD700;
-    cursor: pointer;
-    }
+        position: relative;
+        width: 1.1em;
+        font-size: 2vw;
+        color: #FFD700;
+        cursor: pointer;
+        }
     
     .rating > label::before{
-    content: "\2605";
-    position: absolute;
-    opacity: 0;
-    }
+        content: "\2605";
+        position: absolute;
+        opacity: 0;
+        }
     
     .rating > label:hover:before,
     .rating > label:hover ~ label:before {
@@ -102,5 +141,11 @@ display: inline-block;
     .rating:hover > input:checked ~ label:before{ 
     opacity: 0.4;
      }
-     
- 
+   
+    .cosas{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+   

@@ -31,3 +31,4 @@
         <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
     </form>
 @endsection
+

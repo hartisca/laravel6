@@ -12,11 +12,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2 ">
-            <div class="card">
-                <h1>Comentaris</h1>
-            </div>
-        </div>
+        
     </div>
 </div>
+
 @endsection

@@ -53,13 +53,7 @@
                                 </li>
                             @endif
                         @else
-              
-
-
-
-
-                        <li class="nav-item dropdown"  >
-                            
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>                              
@@ -77,7 +71,7 @@
  
                                 </div>
                             </li>
-</div> </div>
+                           
                         @endguest
                     </ul>
                 </div>
@@ -98,7 +92,7 @@
                     <div class="menu sticky-top">   
                         <img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-High-Quality-Image.png" class="rounded-circle img-thumbnail" alt="Profile image" width="120px">
                         
-                        <div class="nom">{{ Auth::user()->name }}</div>
+                        <div class="nom fontGuay">{{ Auth::user()->name }}</div>
                         <br>                        
                         <ul class="nav flex-column ">
                             <li class="nav-item">
@@ -142,4 +136,3 @@
     </div>
 </body>
 </html>
-

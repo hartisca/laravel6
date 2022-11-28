@@ -1,6 +1,8 @@
 // Load our customized validationjs library
 import Validator from '../validator'
  
+
+
 // Submit form ONLY when validation is OK
 const form = document.getElementById("create")
  

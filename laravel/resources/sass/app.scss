@@ -6,3 +6,212 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+
+//font s
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Audiowide";
+@import "https://fonts.googleapis.com/css?family=Cinzel|Fauna+One";
+
+.fontTitol {
+  font-family: 'Fauna One', serif;
+  font-size: 16px;  
+}
+
+.fontGuay {
+  font-family: "Audiowide", sans-serif;
+}
+.img-fluid{
+    border:black 3px solid;
+}
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+//menu esquerra
+.menu > ul > li{        
+    padding: 5px;
+    margin-top: 40px;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #95ECB0;;
+}
+
+.menu .nom{
+    color: white;
+    
+}
+
+.menu > ul > li:hover {        
+    background-color: rgb(216, 215, 214);
+    font-size: 1.2em;
+}
+
+.fons{
+    background-color: #95ECB0;
+}
+
+.cont333 > .cont444 > h5 > .card-title{
+    color: white;
+}
+
+.col-md-2 > .card {
+    background-color: #95ECB0;
+   
+}
+
+.card .info{
+    background-color: rgb(236, 233, 233);
+    border-radius: 5px;
+    color: black;
+    
+}
+
+.card > .shadow-0 > .border{
+    display:flex;
+    align-items: center;
+}
+
+
+
+.cont333{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+//menu esquerra
+.menu > ul > li{        
+    padding: 5px;
+    margin-top: 40px;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #95ECB0;;
+}
+
+.menu .nom{
+    color: white;
+}
+
+.menu > ul > li:hover {        
+    background-color: rgb(216, 215, 214);
+    font-size: 1.2em;
+}
+
+.fons{
+    background-color: #95ECB0;
+}   
+
+.col-md-2 > .card {
+    background-color: #95ECB0;
+   
+}
+
+.card .info{
+    background-color: rgb(236, 233, 233);
+    border-radius: 5px;
+    color: black;
+    
+}
+
+.card > .shadow-0 > .border{
+    display:flex;
+    align-items: center;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerrr{
+    display: flex;
+    justify-content: space-between;
+}
+
+.img-fluid{
+    border: 2px solid black;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: $color3;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+
+    color: #999;
+}
+
+.circular{
+    border-radius: 50%;
+    border: 2px solid black;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+.cont444{
+    display:flex;
+    align-items: center;
+}
+
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    background-color: $secundary;
+    }
+    
+    .rating > input{
+        display:none;
+    }
+    
+    .rating > label {
+        position: relative;
+        width: 1.1em;
+        font-size: 2vw;
+        color: #FFD700;
+        cursor: pointer;
+        }
+    
+    .rating > label::before{
+        content: "\2605";
+        position: absolute;
+        opacity: 0;
+        }
+    
+    .rating > label:hover:before,
+    .rating > label:hover ~ label:before {
+    opacity: 1 !important;
+    }
+    
+    .rating > input:checked ~ label:before{
+    opacity:1;
+    }
+    
+    .rating:hover > input:checked ~ label:before{ 
+    opacity: 0.4;
+     }
+   
+    .cosas{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .card{
+        background-color: $secundary;
+    }
+   

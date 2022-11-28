@@ -22,7 +22,5 @@ class UserSeeder extends Seeder
             'password'  => Hash::make(config('admin.password')),
         ]);
         $admin->save();
-    }
- 
+    } 
 }
-

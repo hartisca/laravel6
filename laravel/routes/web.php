@@ -1,11 +1,16 @@
 <?php
- 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlaceController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\LanguageController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,38 +22,40 @@ use App\Http\Controllers\PlaceController;
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
-Route::get('/', function () {
-    return view('welcome');
-});
- 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
- 
-require __DIR__.'/auth.php';
-Auth::routes();
- 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
- 
+
 Route::get('/', function (Request $request) {
     $message = 'Loading welcome page';
     Log::info($message);
     $request->session()->flash('info', $message);
     return view('welcome');
- });
- 
+});
+
 Auth::routes();
+require __DIR__.'/email-verify.php';
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home');
 
 Route::get('mail/test', [MailController::class, 'test']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
- 
-Route::resource('files', FileController::class); 
+Route::resource('files', FileController::class)
+   ->middleware(['auth', 'can:files.*']);
+    
 
-Route::resource('files', FileController::class)->middleware(['auth', 'role.any:1,2,3']);
+Route::resource('posts', PostController::class)
+    ->middleware(['auth','can:posts.*']); 
+    
 
-Route::resource('posts',PostsController::class);
+Route::resource('places', PlaceController::class)
+    ->middleware(['auth','can:places.*']);
 
-Route::resource('places',PlaceController::class);
+Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'language']);
+
+Route::post('/posts/{post}/likes',[App\Http\Controllers\PostController::class,'like'])->name('posts.like');
+
+Route::delete('/posts/{post}/likes',[App\Http\Controllers\PostController::class,'unlike'])->name('posts.unlike');
+
+Route::post('/places/{place}/fav', [App\Http\Controllers\PlaceController::class, 'fav'])->name('places.fav');
+
+Route::delete('/places/{place}/fav', [App\Http\Controllers\PlaceController::class, 'unfav'])->name('places.unfav');
 

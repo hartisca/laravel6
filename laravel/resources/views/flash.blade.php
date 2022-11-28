@@ -10,7 +10,7 @@
 @endif
 @if ($message = Session::get('info'))
   @include('flash-message', ['type' => "info", 'message' => $message])
-  @endif
+@endif
 @if ($errors->any())
    @foreach ($errors->all() as $error)
        @include('flash-message', ['type' => "danger", 'message' => $error])

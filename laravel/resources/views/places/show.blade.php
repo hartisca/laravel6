@@ -6,8 +6,9 @@
 
 @if ($place->author_id == auth()->user()->id)
 
-{{ __('Place') }} {{$place->id . ":   " . "favorited by " . $numFavs . " contacts"}} 
+ {{ __('Place') }}  {{$place->id . ":   " . "favorited by " . $numFavs . " contacts"}} 
 @else
+
   {{"Posted by: ". $place->author->name }}
 @endif
 

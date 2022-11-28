@@ -123,10 +123,13 @@
                     </div>
                     <div class="col-md-8 ">
                         <div class="card">
-                            
-                            <div class="card-body">
-                                @yield('box-content')
-                            </div>
+
+                        <div class="card-body">
+                             @yield ('box-title') 
+                        </div>                              
+                        <div class="card-body">
+                             @yield('box-content')
+                        </div>
                         </div>
                     </div>                    
                 </div>

@@ -67,17 +67,10 @@
     <div class="card shadow-0 border" style="background-color: #f0f2f5;">
       <div class="card-body p-4">
       <p class="card-text">{{ $place->description }}
-</div></div></div>
-
-          <p class="card-text">Lat: {{ $place->latitude }} Long: {{ $place->longitude }}</p>
-          
-        
-          <p class="card-text"><small class="text-muted">{{ $place->created_at }}</small></p>
-        </div>
-
-        </div>
-        </div>
-      </div>
+</div>
+</div>
+</div>
+    
       
         <div class="cont333" >
 

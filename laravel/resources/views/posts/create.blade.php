@@ -5,36 +5,34 @@
 @endsection
  
 @section('box-content')
-    <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+    <form method="post" id="create" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
         @vite('resources/js/posts/create.js')
-        <div class="form-group">
+        <div id="body" class="form-group">
             <label for="body">{{ _('Body') }}</label>
             <textarea id="body" name="body" class="form-control"></textarea>
+            <div class="error alert alert-danger alert-dismissible fade"></div>
         </div>
-        <div id="error" class="alert alert-danger alert-dismissible fade"></div>
 
-
-        <div class="form-group">
+        <div id="upload" class="form-group">
             <label for="upload">{{ _('File') }}</label>
             <input type="file" id="upload" name="upload" class="form-control" />
+            <div class="error alert alert-danger alert-dismissible fade"></div>
         </div>
-        <div id="error" class="alert alert-danger alert-dismissible fade"></div>
 
-
-        <div class="form-group">            
+        <div id="latitude" class="form-group">            
                 <label for="latitude">{{ _('Latitude') }}</label>
                 <input type="text" id="latitude" name="latitude" class="form-control"
                     value="41.2310371"/>
+            <div class="error alert alert-danger alert-dismissible fade"></div>            
         </div>
-        <div id="error" class="alert alert-danger alert-dismissible fade"></div>
 
-        <div class="form-group">            
+        <div id="longitude" class="form-group">            
             <label for="longitude">{{ _('Longitude') }}</label>
             <input type="text" id="longitude" name="longitude" class="form-control"
                     value="1.7282036"/>
+            <div  class="error alert alert-danger alert-dismissible fade"></div>                    
         </div>        
-        <div id="error" class="alert alert-danger alert-dismissible fade"></div>
 
         <div class="form-group">
             <label for="visibility">{{ _('Visibility') }}: </label>

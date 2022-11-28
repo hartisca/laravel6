@@ -26,14 +26,14 @@
               <form method="POST" action="{{ route('posts.unlike', $post) }}" enctype="multipart/form-data">
                   @csrf
                   @method("DELETE")
-                  <button class="btn me-md-2" type="submit">{{ $numlikes }} <i class="bi bi-heartbreak"></i></button>
+                  <button class="btn me-md-2" type="submit">{{ $numlikes }} <i class="bi bi-heartbreak-fill"></i></button>
               </form>
           </div>           
           @else        
           <div class ="botonsdreta">
               <form method="POST" action="{{ route('posts.like', $post) }}" enctype="multipart/form-data">
                   @csrf
-                  <button class="btn me-md-2" type="submit">{{ $numlikes }} <i class="bi bi-heart"></i></button>
+                  <button class="btn me-md-2" type="submit">{{ $numlikes }} <i class="bi bi-heart-fill"></i></button>
               </form>
           </div> 
           @endif

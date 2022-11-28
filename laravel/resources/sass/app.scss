@@ -153,10 +153,6 @@ p {
     color: #999;
 }
 
-
-.card{
-    background-color: $secundary;
-}
 .circular{
     border-radius: 50%;
     border: 2px solid black;
@@ -213,5 +209,9 @@ p {
         justify-content: center;
         align-items: center;
         flex-direction: column;
+    }
+
+    .card{
+        background-color: $secundary;
     }
    

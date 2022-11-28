@@ -7,8 +7,8 @@ const form = document.getElementById("create")
 form.addEventListener("submit", function( event ) {
    // Reset errors messages
    // ...  
-    document.querySelector('#error').innerHTML = "";
-    document.querySelector('#error').classList.remove('show');
+    document.querySelector('.error').innerHTML = "";
+    document.querySelector('.error').classList.remove('show');
 
      // Create validation
 
@@ -39,16 +39,12 @@ form.addEventListener("submit", function( event ) {
        // Show error messages
        document.querySelector('#error').classList.add('show');
        for(let inputName in errors) {
-        
-            if(currentLocale == 'ca'){
-               document.querySelector('#error').innerHTML = 'El camp ' + inputName + ' és obligatori.';
-            }
-            if(currentLocale == 'es'){
-                document.querySelector('#error').innerHTML = 'El campo ' + inputName + ' es obligatorio.';
-            }
-            if(currentLocale == 'en'){
-                document.querySelector('#error').innerHTML = 'The field ' + inputName + ' is needed.';
-            }
+
+            let field = document.querySelector('#' + inputName);
+            
+            field.querySelector('.error').classList.add('show');
+            field.querySelector('.error').innerHTML = errors[inputName];
+            
        }
        // Avoid submit
        event.preventDefault()

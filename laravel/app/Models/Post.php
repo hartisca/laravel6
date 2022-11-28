@@ -18,7 +18,7 @@ class Post extends Model
         'latitude',
         'longitude',
         'author_id',
-        'visibility',
+        'visibility',        
     ];
 
     public function file()
@@ -38,5 +38,6 @@ class Post extends Model
     {
        return $this->belongsToMany(User::class, 'likes');
     }
-
+    
+   
 }

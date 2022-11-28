@@ -10,10 +10,16 @@ $line-height-base: 1.6;
 .bg-colorp{
     background-color: #4B8AA3;
 }
-.bg-colors{
-    background-color: #4B8AA3;
-}
 
-.tapisat{
-    //background-image: url(https://www.dicoro.com/blog/wp-content/uploads/2016/06/estampados.jpg);
-}
+$color3: #25599D;
+
+$theme-colors: (
+    'primary':#25599D,
+    'secundary':#b0e9dc,
+    'success':#29c409,
+    'info':#25599D,
+    'warning':#7f9600,
+    'danger': #e73390,
+);
+
+

@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+use App\Models\Fav;
+
 class PlaceController extends Controller
 {
     /**
@@ -15,22 +17,15 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( )
     {
-        foreach (place::all() as $place) {
-            
-            [
-                'place'  => $place,
-                'file'   => $place->file,
-                'author' => $place->user,
-            ];
-            $file=file::find($place->file_id);
-            $user=user::find($place->author_id);
-        }
-       return view("places.index", [
-        "places" => Place::all()
-    ]);
         
+        return view("places.index", [
+            "places" => Place::all(),
+            "files"=> File::all(),
+
+            
+        ]);
     }
 
     /**
@@ -58,6 +53,7 @@ class PlaceController extends Controller
             'upload'      => 'required|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'    => 'required',
             'longitude'   => 'required',
+            
         ]);
         
         // Obtenir dades del formulari
@@ -66,6 +62,8 @@ class PlaceController extends Controller
         $upload      = $request->file('upload');
         $latitude    = $request->get('latitude');
         $longitude   = $request->get('longitude');
+        $visibility  = $request->get('visibility');
+        //$rating      = $request->get('rating');
 
         // Desar fitxer al disc i inserir dades a BD
         $file = new File();
@@ -81,6 +79,7 @@ class PlaceController extends Controller
                 'latitude'    => $latitude,
                 'longitude'   => $longitude,
                 'author_id'   => auth()->user()->id,
+                'visibility'  => $visibility
             ]);
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
@@ -101,15 +100,28 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Place $place)
-    {
-        $file=file::find($place->file_id);
-        $user=user::find($place->author_id);
+    {   
+        $file=File::find($place->file_id);
+        $user=User::find($place->author_id);
+        $logUser = auth()->user()->id;
+        $numFavs= count(Fav::where('user_id',$logUser)->where('place_id',$place->id)->get());
+
+       if( Fav::where('user_id',$logUser)->where('place_id',$place->id)->count() > 0) {
+        $fav = 1;
+       }
+       else{
+        $fav = 0 ;
+    
+       }
 
         return view("places.show", [
             'place'  => $place,
-            'file'   => $place->file,
-            'author' => $place->user,
-        ]);
+            'file'   => $file,
+            'author' => $user,
+            'fav'    => $fav,
+            'numFavs'=> $numFavs,
+            
+           ]);
     }
 
     /**
@@ -119,12 +131,17 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Place $place)
-    {
+    { 
+        if ($place->author_id == auth()->user()->id){
+        
         return view("places.edit", [
             'place'  => $place,
-            'file'   => $place->file,
+            'file'   =>$place->file,
             'author' => $place->user,
-        ]);
+        ]);}
+        else{
+            return redirect()->back()
+            ->with('success', 'You cannot edit this content');}
     }
 
     /**
@@ -143,6 +160,7 @@ class PlaceController extends Controller
             'upload'      => 'nullable|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'    => 'required',
             'longitude'   => 'required',
+            
         ]);
         
         // Obtenir dades del formulari
@@ -151,6 +169,7 @@ class PlaceController extends Controller
         $upload      = $request->file('upload');
         $latitude    = $request->get('latitude');
         $longitude   = $request->get('longitude');
+        $visibility  = $request->get('visibility');
 
         // Desar fitxer (opcional)
         if (is_null($upload) || $place->file->diskSave($upload)) {
@@ -160,6 +179,7 @@ class PlaceController extends Controller
             $place->description = $description;
             $place->latitude    = $latitude;
             $place->longitude   = $longitude;
+            $place->visibility  = $visibility;
             $place->save();
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
@@ -179,13 +199,48 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Place $place)
-    {
+    {   
+    if ($place->author_id == auth()->user()->id){
         // Eliminar place de BD
         $place->delete();
         // Eliminar fitxer associat del disc i BD
         $place->file->diskDelete();
         // Patró PRG amb missatge d'èxit
-        return redirect()->route("places.index")
-            ->with('success', 'Place successfully deleted');
+            return redirect()->route("places.index")
+                ->with('success', 'Place successfully deleted');}
+
+    else {
+            return redirect()->back()
+            ->with('success', 'You cannot delete this content');}
     }
+
+
+
+public function fav (Place $place)
+{
+    
+    Fav::create([
+        'user_id'     => auth()->user()->id,
+        'place_id'    => $place->id
+    ]);
+
+    return redirect()->back()->with('success', __('Place successfully added to favorites'));
+    
+       
+    }
+
+
+public function unfav (Place $place)
+{
+    // Eliminar place de BD
+    $logUser = auth()->user()->id;
+    $fav = Fav::where('user_id',$logUser)->where('place_id',$place->id);
+    $fav->delete();
+    
+
+    return redirect()->back()
+        ->with('success', 'Place successfully removed from favorites');
+}
+
+
 }

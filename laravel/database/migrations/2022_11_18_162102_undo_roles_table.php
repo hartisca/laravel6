@@ -40,7 +40,7 @@ return new class extends Migration
             '--class' => 'RoleSeeder',
             '--force' => true // <--- add this line
         ]);
-
+        
         // Update users table
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('role_id')
@@ -58,5 +58,6 @@ return new class extends Migration
              SET role_id = " . Role::AUTHOR . "
              WHERE role_id IS NULL",
         );
+        
     }
 };

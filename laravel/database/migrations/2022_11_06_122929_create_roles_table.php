@@ -8,6 +8,7 @@ use App\Models\Role;
 
 return new class extends Migration
 {
+    
     /**
      * Run the migrations.
      *
@@ -61,4 +62,5 @@ return new class extends Migration
 
         Schema::dropIfExists('roles');
     }
+    
 };

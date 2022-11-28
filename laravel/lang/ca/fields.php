@@ -6,6 +6,7 @@ return [
     'file_id'=>'Identificador arxiu',
     'latitude'=>'Latitud',
     'longitude'=>'Longitud',
-    'author_id'=>'Identificador de l\'autor',   
+    'author_id'=>'Identificador de l\'autor', 
+    'author'=>'Autor'  
 
 ];

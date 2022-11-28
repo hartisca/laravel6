@@ -57,5 +57,5 @@ Route::delete('/posts/{post}/likes',[App\Http\Controllers\PostController::class,
 
 Route::post('/places/{place}/fav', [App\Http\Controllers\PlaceController::class, 'fav'])->name('places.fav');
 
-Route::delete('/places/{place}/unfav', [App\Http\Controllers\PlaceController::class, 'unfav'])->name('places.unfav');
+Route::delete('/places/{place}/fav', [App\Http\Controllers\PlaceController::class, 'unfav'])->name('places.unfav');
 

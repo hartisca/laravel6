@@ -9,39 +9,35 @@
 @section('box-content')
 <div class="card mb-3">
         <div class="cont333">
-        <div class="cont444">
+          <div class="cont444">
             <img class="circular " src="https://www.cerdanyaecoresort.com/wp-content/uploads/paisatge-fira-cavall-cerdanya-ecoresort-pirineus-2-1024x460.jpg" title ="Image preview"/>
- 
+
             <h5 class=" fontGuay card-title">{{$post->author->name }}</h5>
           </div>
+            
+        </div>        
+          <img class="img-fluid" src="{{asset("storage/{$file->filepath}") }}" title ="Image preview"/>
           
-        </div>
-        <img class="img-fluid" src="{{asset("storage/{$file->filepath}") }}" title ="Image preview"/>
-        <div class="d-flex mb-3">
-        <div class=" fontTitol me-auto p-2"></div>
-        <div class="p-2">
-
-          @if($like == 1)         
-          <div class ="botonsdreta">
-              <form method="POST" action="{{ route('posts.unlike', $post) }}" enctype="multipart/form-data">
-                  @csrf
-                  @method("DELETE")
-                  <button class="btn me-md-2" type="submit">{{ $numlikes }} <i class="bi bi-heartbreak-fill"></i></button>
-              </form>
-          </div>           
-          @else        
-          <div class ="botonsdreta">
-              <form method="POST" action="{{ route('posts.like', $post) }}" enctype="multipart/form-data">
-                  @csrf
-                  <button class="btn me-md-2" type="submit">{{ $numlikes }} <i class="bi bi-heart-fill"></i></button>
-              </form>
-          </div> 
-          @endif
-
-        </div>
-        <div class="p-2">
-        </div>
-        </div>
+          <div class="d-flex mb-3">
+            <div class=" fontTitol me-auto p-2"></div>            
+              @if($like == 1)         
+              <div class ="botonsdreta">
+                  <form method="POST" action="{{ route('posts.unlike', $post) }}" enctype="multipart/form-data">
+                      @csrf
+                      @method("DELETE")
+                      <button class="btn me-md-2" type="submit">{{ $numlikes }} <i class="bi bi-heartbreak-fill"></i></button>
+                  </form>
+              </div>           
+              @else        
+              <div class ="botonsdreta">
+                  <form method="POST" action="{{ route('posts.like', $post) }}" enctype="multipart/form-data">
+                      @csrf
+                      <button class="btn me-md-2" type="submit">{{ $numlikes }} <i class="bi bi-heart-fill"></i></button>
+                  </form>
+              </div> 
+              @endif
+            </div>
+          </div>
         <div class="card shadow-0 border" style="background-color: #f0f2f5;">
           <p class="card-text bg-1" >{{ $post->body }} </p>
         </div>
@@ -54,20 +50,17 @@
 
     <!--si no ets el creador no has de veure editar ni detele-->
 
-    <div class="container" style="margin-bottom:20px">
-
-@if ($post->author_id == auth()->user()->id) 
+  <div class="container" style="margin-bottom:20px">
+    @if ($post->author_id == auth()->user()->id) 
         <a class="btn btn-warning" href="{{ route('posts.edit', $post) }}" role="button">📝 {{ _('Edit') }}</a>
         <form id="form" method="POST" action="{{ route('posts.destroy', $post) }}" style="display: inline-block;">
             @csrf
             @method("DELETE")
             <button id="destroy" type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">🗑️ {{ _('Delete') }}</button>
         </form>
-@endif
-
-        <a class="btn" href="{{ route('places.index') }}" role="button">⬅️ {{ _('Back to list') }}</a>
+    @endif
+        <a class="btn" href="{{ route('posts.index') }}" role="button">⬅️ {{ _('Back to list') }}</a>
     </div>
-
     
     <div class="col-md-12 col-lg-12">
     <div class="card shadow-0 border" style="background-color: #f0f2f5;">

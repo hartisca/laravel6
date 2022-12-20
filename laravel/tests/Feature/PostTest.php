@@ -49,19 +49,7 @@ class MyresourceTest extends TestCase
            'email' => self::$testUser->email,
        ]);
    }
-
- 
-   public function test_posts_auth_operation()
-   {
-       Sanctum::actingAs(self::$testUser);
-       // TODO Lògica del test
-   }
- 
-   public function test_posts_guest_operation()
-   {
-       // TODO Lògica del test
-   }
- 
+    
    public function test_posts_create()
    {
        Sanctum::actingAs(self::$testUser);

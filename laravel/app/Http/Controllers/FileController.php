@@ -124,7 +124,7 @@ class FileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(File $file)
-    {
+    {   
         // Eliminar fitxer del disc i BD
         $file->diskDelete();
         // Patró PRG amb missatge d'èxit

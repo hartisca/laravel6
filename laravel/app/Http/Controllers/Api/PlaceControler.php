@@ -144,15 +144,16 @@ class PlaceController extends Controller
     { 
         if ($place->author_id == auth()->user()->id){
         
-        return response()->json()([
+        return response()->json([
             'succes'=>true,
-            'data' =>
+            'data' => "place,file,author"
             
-            view("places.edit", [ //com li paso aixo dins data?
+            /*view("places.edit", [ //com li paso aixo dins data?
             'place'  => $place,
             'file'   =>$place->file,
-            'author' => $place->user,
-        ]);}
+            'author' => $place->user*/
+        ]);
+        }
         else{
             return redirect()->back()
             ->with('success', 'You cannot edit this content');}

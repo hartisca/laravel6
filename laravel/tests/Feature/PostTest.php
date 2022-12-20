@@ -26,17 +26,24 @@ class MyresourceTest extends TestCase
            "password"  => "12345678"
        ]);
        // TODO Omplir amb dades vàlides
+       $name  = "avatar.png";
+       $size = 500; /*KB*/
+       $upload = UploadedFile::fake()->image($name)->size($size);
        self::$validData = [
-           'name'=> $name,
-           'email' => "{$name}@mailinator.com",
-           'password' => '12345678'
+            'body'      => 'Mensaje de prueba',
+            'upload'    => $upload,
+            'latitude'  => '24.15',
+            'longitude' => '33322',
+            'visibility' => '1',
         ];
 
        // TODO Omplir amb dades incorrectes
        self::$invalidData = [
-           'name' => 'marc',
-           'email' => 'alskfjlasf.es',
-           'password' => '12345678'
+            'body'      => 'Mensaje de prueba',
+            'upload'    => 6,
+            'latitude'  => '24.15',
+            'longitude' => '332225',
+            'visibility' => '1',
        ];
    }
  
@@ -58,6 +65,9 @@ class MyresourceTest extends TestCase
        // Revisar que no hi ha errors de validació
        $params = array_keys(self::$validData);
        $response->assertValid($params);
+
+       //Comprovem si hi ha algún post a la BD
+       $this->assertCount(1, Post::all());
        // TODO Revisar més errors
    }
  
@@ -67,13 +77,22 @@ class MyresourceTest extends TestCase
        // Cridar servei web de l'API
        $response = $this->postJson("/api/posts", self::$invalidData);
        // TODO Revisar errors de validació
-       $params = [ /* Omplir */];
-       $response->assertInvalid($params);
+       $params = [ 'upload'];
+       $response->assertInvalid($params)->assertStatus(302)->assertRedirect(route('list'));       
        // TODO Revisar més errors
    }
  
    // TODO Sub-tests de totes les operacions CRUD
  
+   public function test_list_all(){
+       $response = $this->getJson("/api/posts");
+       $response-> assertStatus(302)->assertRedirect(route('list'));
+       //dd($response->json());
+   }
+
+   
+
+
    public function test_posts_last()
    {
        // Eliminem l'usuari al darrer test

@@ -9,7 +9,7 @@ use App\Models\Post;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Testing\Fluent\AssertableJson;
  
-class MyresourceTest extends TestCase
+class PostTest extends TestCase
 {
    public static User $testUser;
    public static array $validData = [];
@@ -39,8 +39,8 @@ class MyresourceTest extends TestCase
 
        // TODO Omplir amb dades incorrectes
        self::$invalidData = [
-            'body'      => 'Mensaje de prueba',
-            'upload'    => 6,
+            'body'      => 3,
+            'upload'    => $upload,
             'latitude'  => '24.15',
             'longitude' => '332225',
             'visibility' => '1',
@@ -67,7 +67,7 @@ class MyresourceTest extends TestCase
        $response->assertValid($params);
 
        //Comprovem si hi ha algún post a la BD
-       $this->assertCount(1, Post::all());
+       //$this->assertCount(1, Post::all());
        // TODO Revisar més errors
    }
  
@@ -77,8 +77,8 @@ class MyresourceTest extends TestCase
        // Cridar servei web de l'API
        $response = $this->postJson("/api/posts", self::$invalidData);
        // TODO Revisar errors de validació
-       $params = [ 'upload'];
-       $response->assertInvalid($params)->assertStatus(302)->assertRedirect(route('list'));       
+       $params = [ 'body'];
+       $response->assertInvalid($params)->assertStatus(302)->assertRedirect(route('/home'));       
        // TODO Revisar més errors
    }
  
@@ -88,6 +88,11 @@ class MyresourceTest extends TestCase
        $response = $this->getJson("/api/posts");
        $response-> assertStatus(302)->assertRedirect(route('list'));
        //dd($response->json());
+   }
+
+   public function test_destroy(Object $post){
+       $response = $this->getJson("/api/posts/$post->id");
+
    }
 
    

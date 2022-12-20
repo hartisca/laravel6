@@ -25,7 +25,51 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar dades del formulari
+        $validatedData = $request->validate([
+            'body'      => 'required|string',
+            'upload'    => 'required|mimes:gif,jpeg,jpg,png,mp4|max:2048',
+            'latitude'  => 'required',
+            'longitude' => 'required',
+            'visibility' => 'required',
+        ]);
+        
+        // Obtenir dades del formulari
+        $body          = $request->get('body');
+        $upload        = $request->file('upload');
+        $latitude      = $request->get('latitude');
+        $longitude     = $request->get('longitude');
+        $visibility    = $request->get('visibility');
+
+        // Desar fitxer al disc i inserir dades a BD
+        $file = new File();
+        $fileOk = $file->diskSave($upload);
+
+        if ($fileOk) {
+            // Desar dades a BD
+            Log::debug("Saving post at DB...");
+            $post = Post::create([
+                'body'      => $body,
+                'file_id'   => $file->id,
+                'latitude'  => $latitude,
+                'longitude' => $longitude,
+                'author_id' => auth()->user()->id,
+                'visibility' => $visibility
+            ]);
+            Log::debug("DB storage OK");
+            // Patró PRG amb missatge d'èxit
+            return response()->json([
+                'success' => true,
+                'data' => $post
+            ], 200);
+            
+        } else {
+            // Patró PRG amb missatge d'error
+            return redirect()->route('/home')->response()->json([
+                'success' => false,                
+                'data' => $post
+            ], 302);
+        }
     }
 
     /**

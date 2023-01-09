@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\PostController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,6 +34,7 @@ Route::post('/login', [TokenController::class, 'login']);
 Route::post('/logout', [TokenController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::apiResource('posts', PostController::class);
+
 
 
 

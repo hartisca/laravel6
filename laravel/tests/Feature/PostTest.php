@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Post;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Illuminate\Foundation\Testing\WithFaker;
+
  
 class PostTest extends TestCase
 {
@@ -78,21 +80,26 @@ class PostTest extends TestCase
        $response = $this->postJson("/api/posts", self::$invalidData);
        // TODO Revisar errors de validació
        $params = [ 'body'];
-       $response->assertInvalid($params)->assertStatus(302)->assertRedirect(route('/home'));       
+       $response->assertInvalid($params)->assertStatus(422);       
        // TODO Revisar més errors
    }
  
    // TODO Sub-tests de totes les operacions CRUD
  
    public function test_list_all(){
+       // List all files using API web service
        $response = $this->getJson("/api/posts");
-       $response-> assertStatus(302)->assertRedirect(route('list'));
-       //dd($response->json());
+       
+       // Check OK response
+       $this->_test_ok($response);
+       // Check JSON dynamic values
+       $response->assertJsonPath("data",
+           fn ($data) => is_array($data)
+       );
    }
 
    public function test_destroy(Object $post){
        $response = $this->getJson("/api/posts/$post->id");
-
    }
 
    
@@ -107,5 +114,50 @@ class PostTest extends TestCase
            'email' => self::$testUser->email,
        ]);
    }
+   protected function _test_ok($response, $status = 200)
+    {
+        // Check JSON response
+        $response->assertStatus($status);
+        // Check JSON properties
+        $response->assertJson([
+            "success" => true,
+            "data"    => true // any value
+        ]);
+    }
+  
+    protected function _test_error($response)
+    {
+        // Check response
+        $response->assertStatus(422);
+        // Check validation errors
+        $response->assertInvalid(["upload"]);
+        // Check JSON properties
+        $response->assertJson([
+            "message" => true, // any value
+            "errors"  => true, // any value
+        ]);       
+        // Check JSON dynamic values
+        $response->assertJsonPath("message",
+            fn ($message) => !empty($message) && is_string($message)
+        );
+        $response->assertJsonPath("errors",
+            fn ($errors) => is_array($errors)
+        );
+    }
+   
+    protected function _test_notfound($response)
+    {
+        // Check JSON response
+        $response->assertStatus(404);
+        // Check JSON properties
+        $response->assertJson([
+            "success" => false,
+            "message" => true // any value
+        ]);
+        // Check JSON dynamic values
+        $response->assertJsonPath("message",
+            fn ($message) => !empty($message) && is_string($message)
+        );       
+    }
 }
 

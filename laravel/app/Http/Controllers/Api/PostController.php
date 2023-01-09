@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -14,7 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'success' => true,
+            'data' => Post::all(),
+
+        ], 200);
     }
 
     /**
@@ -65,7 +70,7 @@ class PostController extends Controller
             
         } else {
             // Patró PRG amb missatge d'error
-            return redirect()->route('/home')->response()->json([
+            return response()->json([
                 'success' => false,                
                 'data' => $post
             ], 302);

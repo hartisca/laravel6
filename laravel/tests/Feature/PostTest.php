@@ -35,7 +35,7 @@ class PostTest extends TestCase
             'body'      => 'Mensaje de prueba',
             'upload'    => $upload,
             'latitude'  => '24.15',
-            'longitude' => '33322',
+            'longitude' => '33.322',
             'visibility' => '1',
         ];
 
@@ -44,7 +44,7 @@ class PostTest extends TestCase
             'body'      => 3,
             'upload'    => $upload,
             'latitude'  => '24.15',
-            'longitude' => '332225',
+            'longitude' => '33.322',
             'visibility' => '1',
        ];
    }
@@ -64,13 +64,14 @@ class PostTest extends TestCase
        Sanctum::actingAs(self::$testUser);
        // Cridar servei web de l'API
        $response = $this->postJson("/api/posts", self::$validData);
+        // Check OK response
+        $this->_test_ok($response, 201);
        // Revisar que no hi ha errors de validació
        $params = array_keys(self::$validData);
        $response->assertValid($params);
-
-       //Comprovem si hi ha algún post a la BD
-       //$this->assertCount(1, Post::all());
-       // TODO Revisar més errors
+       // Read, update and delete dependency!!!
+       $json = $response->getData();
+       return $json->data;
    }
  
    public function test_posts_create_error()
@@ -98,13 +99,34 @@ class PostTest extends TestCase
        );
    }
 
+   /**
+     * @depends test_posts_create
+     */
+   public function test_post_update(object $post)
+   {
+       Sanctum::actingAs(self::$testUser);
+
+      $response = $this->putJson("/api/posts/{$post->id}", [self::$validData]);
+      $params = array_keys(self::$validData);
+      $response->assertValid($params);
+      // Check OK response
+      $this->_test_ok($response, 201);
+          
+      $response->assertJsonPath("data.id",
+        fn ($id) => !empty($id)
+    );
+        // Read, update and delete dependency!!!
+        $json = $response->getData();
+        return $json->data;
+
+  }
+
+
    public function test_destroy(Object $post){
        $response = $this->getJson("/api/posts/$post->id");
    }
 
    
-
-
    public function test_posts_last()
    {
        // Eliminem l'usuari al darrer test

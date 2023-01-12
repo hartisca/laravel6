@@ -35,6 +35,7 @@ Route::post('/logout', [TokenController::class, 'logout'])->middleware('auth:san
 
 Route::apiResource('posts', PostController::class);
 
+Route::post('posts/{post}', [PostController::class, 'update_workaround']);
 
 
 

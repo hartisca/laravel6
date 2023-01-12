@@ -59,3 +59,4 @@ Route::post('/places/{place}/fav', [App\Http\Controllers\PlaceController::class,
 
 Route::delete('/places/{place}/fav', [App\Http\Controllers\PlaceController::class, 'unfav'])->name('places.unfav');
 
+Route::get('/aboutus', [App\Http\Controllers\AboutusController::class, 'aboutus']);

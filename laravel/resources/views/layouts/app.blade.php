@@ -117,6 +117,9 @@
                             <li class="nav-item">
                                 <a class="dropdown-item" href="#"><i class="bi bi-search"></i> Filtrar</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="{{ url('aboutus') }}"><i class="bi bi-search"></i> About Us</a>
+                            </li>
                         </ul>
                     </div>    
                         

@@ -37,6 +37,9 @@ Route::apiResource('posts', PostController::class);
 
 Route::post('posts/{post}', [PostController::class, 'update_workaround']);
 
+Route::post('/posts/{post}/likes',[PostController::class,'like'])->name('posts.like');
+
+Route::delete('/posts/{post}/likes',[PostController::class,'unlike'])->name('posts.unlike');
 
 
 

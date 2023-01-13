@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
@@ -86,7 +87,29 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = File::find($id);
+
+        if ($post === null){
+
+            return response()->json([
+                'success' => false,
+                'message'    => 'Post not found'
+            ], 404);
+        }
+
+        if ($post->exists()){
+
+            return response()->json([
+                'success' => true,
+                'data'    => $post
+            ], 200);
+        } else {
+
+            return response()->json([
+                'success'  => false,
+                'message' => 'Error, post not found'
+            ], 500);
+        }
     }
 
     /**
@@ -99,52 +122,101 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
+        $file = File::find($id);
 
-        if ($post){
-            // Validar fitxer
-            $validatedData = $request->validate([
-                'body'      => 'required|string',
-                'upload'    => 'required|mimes:gif,jpeg,jpg,png,mp4|max:2048',
-                'latitude'  => 'required',
-                'longitude' => 'required',
-                'visibility' => 'required',
-            ]);
 
-            // Obtenir dades del formulari
-            $body      = $request->get('body');
-            $upload    = $request->file('upload');
-            $latitude  = $request->get('latitude');
-            $longitude = $request->get('longitude');
-            $visibility = $request->get('visibility');
+        if ($post === null){
 
-            // Desar fitxer al disc i inserir dades a BD
-            $upload = $request->file('upload');
-            $ok = $file->diskSave($upload);
-        
-            if ($ok) {
-                $post->body      = $body;
-                $post->latitude  = $latitude;
-                $post->longitude = $longitude;
-                $post->visibility = $visibility;
-                $post->save();
-                return response()->json([
-                    'success' => true,
-                    'data'    => $post
-                ], 201);
-            } else {
+            return response()->json([
+                'success' => false,
+                'message'    => 'Post not found'
+            ], 404);
+        }
+        // Validar fitxer
+        // Validar fitxer
+        $validatedData = $request->validate([
+            'body'      => 'required|string',
+            'upload'    => 'required|mimes:gif,jpeg,jpg,png,mp4|max:2048',
+            'latitude'  => 'required',
+            'longitude' => 'required',
+            'visibility' => 'required',
+        ]);
 
-                return response()->json([
-                    'success'  => false,
-                    'message' => 'Error uploading post'
-                ], 500);
-            } 
+        // Obtenir dades del formulari
+        $body      = $request->get('body');
+        $upload    = $request->file('upload');
+        $latitude  = $request->get('latitude');
+        $longitude = $request->get('longitude');
+        $visibility = $request->get('visibility');
+
+        // Desar fitxer al disc i inserir dades a BD
+        $upload = $request->file('upload');
+        $ok = $file->diskSave($upload);
+    
+        if ($ok) {
+            $post->body      = $body;
+            $post->latitude  = $latitude;
+            $post->longitude = $longitude;
+            $post->visibility = $visibility;
+            $post->save();
+
+            return response()->json([
+                'success' => true,
+                'data'    => $post
+            ], 201);
+        } else {
+
+            return response()->json([
+                'success'  => false,
+                'message' => 'Error uploading post'
+            ], 500);
+        } 
+    }   
+
+    public function like($id)
+    {
+        $post = Post::find($id);        
+        $like = Like::create([
+            'user_id' => auth()->user()->id,
+            'post_id' => $post->id,
+        ]);
+
+        if ($like){
+            return response()->json([
+                'success' => true,
+                'data' => $like,
+            ]); 
         }else{
             return response()->json([
                 'success' => false,
-                'message' => 'Post not found'
-            ], 404);
-        }    
-    }   
+                'message' => 'Error on liking the post',
+            ]); 
+        }
+        
+    }
+
+    public function unlike($id){
+
+        $post = Post::find($id);
+        $logUser = auth()->user()->id;
+        $like = Like::where('user_id', $logUser)->where('post_id', $post->id);
+
+        if ($like){
+            
+            $like->delete();
+
+            return response()->json([
+                'success' => true,
+                'data' => $post,
+            ], 200); 
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Error on this unlike'
+            ], 500);
+        }
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -154,7 +226,32 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);        
+        
+        if ($post === null){
+
+            return response()->json([
+                'success' => false,
+                'message'    => 'Post not found'
+            ], 404);
+        }
+        
+        $ok = $post->delete();
+
+        if ($ok){
+
+            return response()->json([
+                'success' => true,
+                'data'    => $post
+            ], 200);
+
+        } else {
+
+            return response()->json([
+                'success'  => false,
+                'message' => 'Error, deleting post',
+            ], 500);
+        }
     }
 
     public function update_workaround(Request $request, $id)

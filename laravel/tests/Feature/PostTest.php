@@ -101,31 +101,116 @@ class PostTest extends TestCase
 
    /**
      * @depends test_posts_create
-     */
+    */
    public function test_post_update(object $post)
    {
-       Sanctum::actingAs(self::$testUser);
+      Sanctum::actingAs(self::$testUser);
 
-      $response = $this->putJson("/api/posts/{$post->id}", [self::$validData]);
-      $params = array_keys(self::$validData);
-      $response->assertValid($params);
+      // Create fake file
+      $name  = "photo.jpg";
+      $size = 1000; /*KB*/
+      $upload = UploadedFile::fake()->image($name)->size($size);
+
+      $response = $this->putJson("/api/posts/{$post->id}", [
+          'upload' => $upload,
+          'body' => 'new body',
+          'latitude' => '22.25',
+          'longitude' => '14.36',
+          'visibility' => 2]);
+      
+      $response->assertValid(['upload', 'body', 'latitude', 'longitude', 'visibility']);
       // Check OK response
       $this->_test_ok($response, 201);
           
       $response->assertJsonPath("data.id",
-        fn ($id) => !empty($id)
-    );
+        fn ($id) => !empty($id));
         // Read, update and delete dependency!!!
         $json = $response->getData();
         return $json->data;
 
   }
 
+     /**
+    * @depends test_posts_create
+    */
+    public function test_post_update_error(object $post)
+    {
+        // Create fake file with invalid max size
+        $body = 42;
+        $latitude = '255555';
+        // Upload fake file using API web service
+        $response = $this->putJson("/api/posts/{$post->id}", [
+            'body' => $body,
+            'latitude' => $latitude,
+        ]);
+        // Check ERROR response
+        $this->_test_error($response);
+    }
+
+    /**
+     * @depends test_posts_create
+     */
+    public function test_post_show(object $post)
+    {
+        // Read one file
+        $response = $this->getJson("/api/posts/{$post->id}");
+        // Check OK response
+        $this->_test_ok($response);
+        // Check JSON exact values
+        $response->assertJsonPath("data.id",
+            fn ($id) => !empty($id)
+        );
+    }
+
+    public function test_post_show_notfound()
+    {
+        $id = "not_exists";
+        $response = $this->getJson("/api/posts/{$id}");
+        $this->_test_notfound($response);
+    }
+
+    /**
+     * @depends test_posts_create
+     */
+    public function test_like_post(object $post)
+    {
+       Sanctum::actingAs(self::$testUser);
+
+       $response = $this->postJson("/api/posts/{$post->id}/likes");
+       // Check OK response
+       $this->_test_ok($response);
+
+    }
+
+    /**
+     * @depends test_posts_create
+     */
+    public function test_unlike_post(object $post)
+    {
+        Sanctum::actingAs(self::$testUser);
+
+       $response = $this->deleteJson("/api/posts/{$post->id}/likes");
+       // Check OK response
+       $this->_test_ok($response);
+    }
+
+    /**
+     * @depends test_posts_create
+    */
 
    public function test_destroy(Object $post){
-       $response = $this->getJson("/api/posts/$post->id");
+       // Delete one file using API web service
+       $response = $this->deleteJson("/api/posts/{$post->id}");
+       // Check OK response
+       $this->_test_ok($response);
    }
 
+   public function test_post_update_notfound()
+   {
+       $id = "not_exists";
+       $response = $this->putJson("/api/posts/{$id}", []);
+       $this->_test_notfound($response);
+   }
    
    public function test_posts_last()
    {

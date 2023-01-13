@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('store','update','like','unlike');
+    }
     /**
      * Display a listing of the resource.
      *

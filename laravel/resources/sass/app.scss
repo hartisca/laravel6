@@ -178,7 +178,7 @@ p {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    background-color: $secundary;
+    background-color: var(--bs-card-color);
     }
     
     .rating > input{

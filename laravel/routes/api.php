@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\User;
+use App\Http\Controllers\Api\PostController;
+
+
 
 
 /*
@@ -29,6 +32,14 @@ Route::post('/register', [TokenController::class, 'register']);
 Route::post('/login', [TokenController::class, 'login']);
 
 Route::post('/logout', [TokenController::class, 'logout'])->middleware('auth:sanctum');
+
+Route::apiResource('posts', PostController::class);
+
+Route::post('posts/{post}', [PostController::class, 'update_workaround']);
+
+Route::post('/posts/{post}/likes',[PostController::class,'like'])->name('posts.like');
+
+Route::delete('/posts/{post}/likes',[PostController::class,'unlike'])->name('posts.unlike');
 
 
 

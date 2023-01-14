@@ -117,12 +117,16 @@
                             <li class="nav-item">
                                 <a class="dropdown-item" href="#"><i class="bi bi-search"></i> Filtrar</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="{{ url('aboutus') }}"><i class="fa-solid fa-address-card"></i> About Us</a>
+                            </li>
                         </ul>
                     </div>    
                         
                     </div>
                     <div class="col-md-8 ">
                         <div class="card">
+<<<<<<< HEAD
 
                         <div class="card-body">
                              @yield ('box-title') 
@@ -130,6 +134,14 @@
                         <div class="card-body">
                              @yield('box-content')
                         </div>
+=======
+                            <div class = "card-body">
+                                @yield('box-title')
+                            </div>                            
+                            <div class="card-body">
+                                @yield('box-content')
+                            </div>
+>>>>>>> 516a3b142e385ed14dfb34b853603569b0652f57
                         </div>
                     </div>                    
                 </div>

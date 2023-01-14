@@ -14,21 +14,21 @@
         <div class="cont333">
           <div class="cont444">
               <h5 class="card-title"> {{$post->author->name }} </h5>
-          </div>
-         
+          </div>         
         </div>
         <a class="btn" href="{{ route('posts.show', $post) }}" role="button"> 
-      @foreach ($files as $file)
-        @if ($file->id == $post->file_id)
-          <img class="img-fluid" src="{{asset("storage/{$file->filepath}") }}" title ="Image preview"/>
-        @endif
-      @endforeach
+        @foreach ($files as $file)
+          @if ($file->id == $post->file_id)
+            <img class="img-fluid" src="{{asset("storage/{$file->filepath}") }}" title ="Image preview"/>
+          @endif
+        @endforeach
         </a>
         <div class = "info">
           <p class="card-text">{{ $post->body }}</p>
           <p class="card-text">{{ $post->latitude }}</p>
           <p class="card-text"><small class="text-muted">{{ $post->created_at }}.{{ $post->updated_at }}</small></p>                
         </div>  
+      </div>
         
 @endforeach
     </tbody>

@@ -23,7 +23,11 @@
 }
 .img-fluid{
     border:black 3px solid;
+    border-radius: 3%;
+    width: 98%;
+    margin: auto;    
 }
+
 .info{
     display: flex;
     justify-content: center;
@@ -61,6 +65,10 @@
 .col-md-2 > .card {
     background-color: #95ECB0;
    
+}
+
+.card .mb-3{
+    background-color: rgb(228, 226, 226);
 }
 
 .card .info{
@@ -153,10 +161,6 @@ p {
     color: #999;
 }
 
-
-.card{
-    background-color: $secundary;
-}
 .circular{
     border-radius: 50%;
     border: 2px solid black;
@@ -208,10 +212,14 @@ p {
     opacity: 0.4;
      }
    
-    .cosas{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
+.cosas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card{
+    background-color: rgb(101, 187, 221);
+}
    

@@ -124,17 +124,15 @@ class PostTest extends TestCase
           
       $response->assertJsonPath("data.id",
         fn ($id) => !empty($id));
-        // Read, update and delete dependency!!!
-        $json = $response->getData();
-        return $json->data;
-
-  }
+    }
 
      /**
     * @depends test_posts_create
     */
     public function test_post_update_error(object $post)
     {
+        Sanctum::actingAs(self::$testUser);
+
         // Create fake file with invalid max size
         $body = 42;
         $latitude = '255555';
@@ -146,6 +144,15 @@ class PostTest extends TestCase
         // Check ERROR response
         $this->_test_error($response);
     }
+
+    public function test_post_update_notfound()
+   {
+       Sanctum::actingAs(self::$testUser);
+       
+       $id = "not_exists";
+       $response = $this->putJson("/api/posts/{$id}", []);
+       $this->_test_notfound($response);
+   }
 
     /**
      * @depends test_posts_create
@@ -203,14 +210,7 @@ class PostTest extends TestCase
        $response = $this->deleteJson("/api/posts/{$post->id}");
        // Check OK response
        $this->_test_ok($response);
-   }
-
-   public function test_post_update_notfound()
-   {
-       $id = "not_exists";
-       $response = $this->putJson("/api/posts/{$id}", []);
-       $this->_test_notfound($response);
-   }
+   }   
    
    public function test_posts_last()
    {

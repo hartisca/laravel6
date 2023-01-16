@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\User;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\PlaceController;
+
 
 
 
@@ -40,6 +42,14 @@ Route::post('posts/{post}', [PostController::class, 'update_workaround']);
 Route::post('/posts/{post}/likes',[PostController::class,'like'])->name('posts.like');
 
 Route::delete('/posts/{post}/likes',[PostController::class,'unlike'])->name('posts.unlike');
+
+Route::apiResource('places', PlaceController::class);
+
+Route::post('places/{place}', [PlaceController::class, 'update_workaround']);
+
+Route::post('/places/{place}/fav',[PlaceController::class,'fav']);
+
+Route::delete('/places/{place}/fav',[PlaceController::class,'unfav']);
 
 
 

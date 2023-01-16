@@ -225,7 +225,8 @@ p{
     </div>
 
     <div class="container-about-us">
-        <div class="card" id="hectorBox" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    
+        <div class="card" id="hectorBox" data-bs-toggle="modal" data-bs-target="#staticBackdrop" draggable="true" ondragstart="drag(Event)">
             <div class="cara front">
 
                 <img id="seria"
@@ -260,7 +261,10 @@ p{
 
         </div>
 
-        <div class="card" id="marcBox" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+        
+
+
+        <div class="card" id="marcBox" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" draggable="true" ondragstart="drag(Event)">
             <div class="cara front2">
 
                 <img id="seria"
@@ -447,19 +451,23 @@ function stopVideoM(){
     video2m.currentTime = 0;    
 }
 
-//tencar finestra al clicar fora
+//tencar finestra al clicar fora:
 window.addEventListener('click', outsideClick);
 
 function outsideClick(e) {
     if (e.target == modal) {
         modal.style.display = 'none';
-        playerm.stopVideoM();
+        
+        stopVideoM();
     }
+
 }
+ 
 //que es pari el video al clicar a la creu de tencar pop up
 closeBtnM.addEventListener('click', function(){
     stopVideoM();
 });
+
 
 //cambiar el video a reproduir i treure el mute
    
@@ -478,13 +486,7 @@ function changeSourceM(event) {
    video1m.filename = "video/Dogs.mp4";
    video2m.addEventListener('click', changeSourceM);
    video2m.filename = "video/The.wait.mp4";
-   
 
-
-
-closeBtnM.addEventListener('click', function(){
-    stopVideoM();
-});
 </script>
 
 </body>

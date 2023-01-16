@@ -126,7 +126,6 @@
                     </div>
                     <div class="col-md-8 ">
                         <div class="card">
-<<<<<<< HEAD
 
                         <div class="card-body">
                              @yield ('box-title') 
@@ -134,14 +133,6 @@
                         <div class="card-body">
                              @yield('box-content')
                         </div>
-=======
-                            <div class = "card-body">
-                                @yield('box-title')
-                            </div>                            
-                            <div class="card-body">
-                                @yield('box-content')
-                            </div>
->>>>>>> 516a3b142e385ed14dfb34b853603569b0652f57
                         </div>
                     </div>                    
                 </div>

@@ -112,7 +112,7 @@ class PostController extends Controller
 
             return response()->json([
                 'success'  => false,
-                'message' => 'Error, post not found'
+                'message' => 'Error!'
             ], 500);
         }
     }

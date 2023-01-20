@@ -39,7 +39,8 @@
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>             
+                </button>            
+                 
  
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -49,6 +50,15 @@
  
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Team info
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('aboutus') }}"><i class="bi bi-info-circle-fill"></i> About Us</a>                            
+                                <a class="dropdown-item" href="{{ url('contacte') }}"><i class="bi bi-person-lines-fill"></i> Contacta</a>
+                            </div>  
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -81,6 +91,7 @@
  
                                 </div>
                             </li>
+                            
                            
                         @endguest
                     </ul>
@@ -127,12 +138,7 @@
                             <li class="nav-item">
                                 <a class="dropdown-item" href="#"><i class="bi bi-search"></i> Filtrar</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="{{ url('aboutus') }}"><i class="bi bi-info-circle-fill"></i> About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="{{ url('contacte') }}"><i class="bi bi-person-lines-fill"></i> Contacta</a>
-                            </li>
+                           
                         </ul>
                     </div>    
                         

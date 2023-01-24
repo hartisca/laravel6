@@ -67,8 +67,15 @@
     <div class="card shadow-0 border" style="background-color: #f0f2f5;">
       <div class="card-body p-4">
       <p class="card-text">{{ $place->description }}
+<<<<<<< HEAD
+</div>
+</div>
+</div>
+    
+=======
 </div></div></div></div>
 
+>>>>>>> 516a3b142e385ed14dfb34b853603569b0652f57
       
         <div class="cont333" >
 

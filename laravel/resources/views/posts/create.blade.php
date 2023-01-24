@@ -7,7 +7,16 @@
 @section('box-content')
     <form method="post" id="create" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
-        @vite('resources/js/posts/create.js')
+        @env(['local', 'developmnet'])
+            @vite('resources/js/posts/create.js')
+        @endenv
+        @env(['production'])
+            @php
+                $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        @endphp
+        <script type="module" src="/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
+        <link rel="stylesheet" href="/build/{{ $manifest['resources/sass/app.scss']['file'] }}">
+        @endenv
         <div id="body" class="form-group">
             <label for="body">{{ _('Body') }}</label>
             <textarea id="body" name="body" class="form-control"></textarea>

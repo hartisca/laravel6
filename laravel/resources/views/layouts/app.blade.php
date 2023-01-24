@@ -15,7 +15,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
  
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @env(['local','development'])
+       @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])  
+   @endenv
+   @env(['production'])
+       @php
+           $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+       @endphp
+       <script type="module" src="/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
+       <link rel="stylesheet" href="/build/{{ $manifest['resources/sass/app.scss']['file'] }}">
+   @endenv
+
 </head>
 <body class="tapisat">    
     <div id="app">
@@ -29,7 +39,8 @@
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>             
+                </button>            
+                 
  
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -39,6 +50,15 @@
  
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Team info
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('aboutus') }}"><i class="bi bi-info-circle-fill"></i> About Us</a>                            
+                                <a class="dropdown-item" href="{{ url('contacte') }}"><i class="bi bi-person-lines-fill"></i> Contacta</a>
+                            </div>  
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -71,6 +91,7 @@
  
                                 </div>
                             </li>
+                            
                            
                         @endguest
                     </ul>
@@ -117,18 +138,20 @@
                             <li class="nav-item">
                                 <a class="dropdown-item" href="#"><i class="bi bi-search"></i> Filtrar</a>
                             </li>
+                           
                         </ul>
                     </div>    
                         
                     </div>
                     <div class="col-md-8 ">
                         <div class="card">
-                            <div class = "card-body">
-                                @yield('box-title')
-                            </div>                            
-                            <div class="card-body">
-                                @yield('box-content')
-                            </div>
+
+                        <div class="card-body">
+                             @yield ('box-title') 
+                        </div>                              
+                        <div class="card-body">
+                             @yield('box-content')
+                        </div>
                         </div>
                     </div>                    
                 </div>

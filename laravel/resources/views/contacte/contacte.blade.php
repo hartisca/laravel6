@@ -14,6 +14,15 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
  
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+
     <!-- Scripts -->
     @env(['local','development'])
        @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])  
@@ -100,19 +109,100 @@
 
         @endguest
     </div>
-    <header class="container"   >
+   
+    <div class="contacte-box">   
         <!-- The video -->
         <video autoplay muted loop id="myVideo">
-            <source src="/video/Vertical-Glowing-Neon-Lights-Stage-Loop-Animated-Background-Motion-Made.mov" type="video/mp4">
+            <source src="video/backgroundVideo.mov" >
         </video>
 
         <!-- Optional: some overlay text to describe the video -->
-        <div class="content">
-            <h1>Heading</h1>
-            <p>Lorem ipsum...</p>
-        <!-- Use a button to pause/play the video with JavaScript -->
-            <button id="myBtn" onclick="myFunction()">Pause</button>
+        <div class="contacte-text">
+        <h1>Contacta'ns</h1>
+        <h3>Envia el teu missatge</h3>
+        <a href="#" class="btn3">Formulari de contacte</a>
         </div>
-    </header>    
+        
+   <div>
+       <h1>Vols visitar-nos?</h1>
+
+        <h2>ubica'ns al mapa</h2>
+        
+    
+    </div> 
+</div>
+<br>
+    <div id="map">
+        <script>
+            var map = L.map('map').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        </script>
+    </div>
+    
 </body>
-</html>
+</html> 
+
+
+
+
+<style>
+   
+     /* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.contacte-box{
+    display:flex;
+    justify-content:center;
+    background-color:white;  
+    
+
+}
+
+.contacte-text { 
+    position: fixed;
+    bottom: 55%;
+    color: #f1f1f1;
+    width: 36%;
+    padding: 20px;
+    flex-direction:column;
+    margin:auto;
+    display:flex;
+    align-items:center;
+
+}
+
+
+/* Style the button used to pause/play the video */
+.btn3 {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: solid 3px white;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  background:rgb(0,0,0,0.3);
+  border-radius:15px;
+}
+
+.btn3:hover {
+  background: #ddd;
+  color: black;
+} 
+
+#map {
+    height: 200px;
+    
+}
+</style>

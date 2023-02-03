@@ -100,7 +100,7 @@
 
         @endguest
     </div>
-    <header class="container"   >
+    <header class="showcase" >
         <!-- The video -->
         <video autoplay muted loop id="myVideo">
             <source src="/video/Vertical-Glowing-Neon-Lights-Stage-Loop-Animated-Background-Motion-Made.mov" type="video/mp4">

@@ -1,208 +1,193 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
- 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
- 
-    <title>NearME</title>
- 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="{{ asset(mix('js/app.js')) }}"></script>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
      crossorigin=""/>
-
      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
-
-    <!-- Scripts -->
-    @env(['local','development'])
-       @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])  
-   @endenv
-   @env(['production'])
-       @php
-           $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
-       @endphp
-       <script type="module" src="/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
-       <link rel="stylesheet" href="/build/{{ $manifest['resources/sass/app.scss']['file'] }}">
-   @endenv
-
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="tapisat">    
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class = "lang-switcher">            
-            @include('partials.language-switcher')
+<script>
+    document.getElementById("myAnchor").accessKey = "f";
+
+</script>
+
+<section class="showcase">
+    <div class="video-container">
+        <video src="/video/backgroundVideo.mov" autoplay muted loop></video>
+    </div>
+    <div class="content">
+        <h1 class="h1contacte">Contacta'ns</h1>
+        <h2>Envia el teu missatge</h2>
+        <a href="www.google.com" accesskey="f" id="myAnchor" class="btncontacte">Formulari de contacte(SHFT+ALT+f)</a>
+    </div>
+</section>
+<section id="mapa">
+    <div class="cajamapa">
+        <div class="ubicans">
+            <h1>Vols visitar-nos?</h1>
+            <h2>Ubica'ns al mapa</h2>
         </div>
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    NearME
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>             
- 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
- 
-                    </ul>
- 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
- 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>                              
- 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
- 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>                              
- 
-                                </div>
-                            </li>
-                           
-                        @endguest
-                    </ul>
-                </div>
+    
+        <div id="map">
+            <script>
+                var map = L.map('map').setView([41.23112, 1.72866], 18);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+            </script>
+        </div>
+    </div>
+</section>
+<section class="footer">
+    <div class="contenidofooter">
+        <div class="segueixnoscontacte">
+            <h2>Segueix-nos a xarxes!</h2>
+            <div class="iconoscontacte">
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-linkedin"></i> 
             </div>
-        </nav>
-        @guest
-            <main class="py-4">
-                @include('flash')
-                @yield('content')
-            </main>
-        @else
-        <br>
-            <div class="container" bg>  
-                @include('flash')       
-            </div>   
-
-        @endguest
-    </div>
-   
-    <div class="contacte-box">   
-        <!-- The video -->
-        <video autoplay muted loop id="myVideo">
-            <source src="video/backgroundVideo.mov" >
-        </video>
-
-        <!-- Optional: some overlay text to describe the video -->
-        <div class="contacte-text">
-        <h1>Contacta'ns</h1>
-        <h3>Envia el teu missatge</h3>
-        <a href="#" class="btn3">Formulari de contacte</a>
+            
         </div>
         
-   <div>
-       <h1>Vols visitar-nos?</h1>
 
-        <h2>ubica'ns al mapa</h2>
-        
-    
-    </div> 
-</div>
-<br>
-    <div id="map">
-        <script>
-            var map = L.map('map').setView([51.505, -0.09], 13);
-
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-        </script>
     </div>
-    
-</body>
-</html> 
-
-
-
-
+</section>
 <style>
-   
-     /* Style the video: 100% width and height to cover the entire window */
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
+    .h1contacte {
+    font-weight: 300;
+    font-size: 60;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+.showcase {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.20px;
+    color: #fff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black no-repeat center center/cover;
+}
+.video-container video {
+    min-width: 100;
+    min-height: 100;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.video-container:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+
+}
+.content {
+    z-index: 0;
+    margin-bottom: 150px;
+}
+.btncontacte {
+    display: inline-block;
+    padding: 10px 30px;
+    background: #3a4052;
+    color: #fff;
+    border: 1px #fff solid;
+    border-radius: 5px;
+    margin-top: 25px;
+    opacity: 0.7;
+}
+.btncontacte:hover {
+    transform: scale(0.98);
+}
+#map { 
+    height: 430px;
+    width: 90%;
+    margin-bottom: 50px;
+    margin-left: 5%;
+}
+#mapa {
+    background-color: white;
+}
+.cajamapa {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cajamapa h1 {
+    color: black;
+    font-size: 3em;
+}
+.cajamapa h2 {
+    color: black;
+    font-size: 2.3em;
+}
+.ubicans {
+    width: 40%;
+    margin-top: 3%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.footer {
+    background-color: #403c54;
+    height: 150px;
+    color: white;
+}
+.contenidofooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.segueixnoscontacte {
+    margin-top: 3%;
+    width: 40%;
+    text-align: center;
+}
+.iconoscontacte {
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.iconoscontacte i {
+    font-size: 1.5em;
 }
 
-/* Add some content at the bottom of the video/page */
-.contacte-box{
-    display:flex;
-    justify-content:center;
-    background-color:white;  
-    
-
-}
-
-.contacte-text { 
-    position: fixed;
-    bottom: 55%;
-    color: #f1f1f1;
-    width: 36%;
-    padding: 20px;
-    flex-direction:column;
-    margin:auto;
-    display:flex;
-    align-items:center;
-
-}
-
-
-/* Style the button used to pause/play the video */
-.btn3 {
-  width: 200px;
-  font-size: 18px;
-  padding: 10px;
-  border: solid 3px white;
-  background: #000;
-  color: #fff;
-  cursor: pointer;
-  background:rgb(0,0,0,0.3);
-  border-radius:15px;
-}
-
-.btn3:hover {
-  background: #ddd;
-  color: black;
-} 
-
-#map {
-    height: 200px;
-    
-}
 </style>

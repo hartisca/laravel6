@@ -17,8 +17,13 @@
      crossorigin=""></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<script src="keymaster.js"></script>
 <script>
     document.getElementById("myAnchor").accessKey = "f";
+    
+
+
+    
 
 </script>
 
@@ -38,15 +43,36 @@
             <h1>Vols visitar-nos?</h1>
             <h2>Ubica'ns al mapa</h2>
         </div>
-    
+        <button onclick="getLocation()">Ubicarte on ets!</button>
+
+<p id="demo"></p>
+
         <div id="map">
             <script>
-                var map = L.map('map').setView([41.23112, 1.72866], 18);
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
+               
 
+  const mir = { lat: 42.24, lng: 1.70 };
+   var map = L.map('map').setView([41.23112, 1.72866], 18);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+         maxZoom: 19,
+         center: mir,
+            }).addTo(map);
+    L.marker([41.23089, 1.72917]).addTo(map).bindPopup('Els mossos!<br> oju!').openPopup();
+
+    
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  }
+}
+function showPosition(position) {
+  Lat = position.coords.latitude;
+  Lon =position.coords.longitude;
+  
+  L.marker([ Lat, Lon ]).addTo(map).bindPopup('Estas aqui!').openPopup();
+}
+
+            
             </script>
         </div>
     </div>

@@ -90,12 +90,16 @@ function showPosition(position) {
     </div>
 </section>
 <style>
+
+    /* Afegim estils a les etiquetes h1 de contacte */
     .h1contacte {
     font-weight: 300;
     font-size: 60;
     line-height: 1.2;
     margin-bottom: 15px;
 }
+
+/* Secció del video fixe amb el cartell, fixem la posició donem alçada, fem que sigui un contenidor flex per tal d'alinear tot el contingut a dins, després donem estils */
 .showcase {
     position: relative;
     height: 100vh;
@@ -108,6 +112,7 @@ function showPosition(position) {
     color: #fff;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+/* Posició absolute i la fixem a dalt */
 .video-container {
     position: absolute;
     top: 0;
@@ -115,13 +120,16 @@ function showPosition(position) {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    /*Definim les propietats del video, que no repeteixi la imatge, centrat... */
     background: black no-repeat center center/cover;
 }
+
 .video-container video {
     min-width: 100;
     min-height: 100;
     width: 100%;
     height: 100%;
+    /*Aqui fem que el video ocupi tot el tamany del contenidor */
     object-fit: cover;
     position: absolute;
     top: 50%;
@@ -138,10 +146,12 @@ function showPosition(position) {
     background: rgba(0,0,0,0.4);
 
 }
+/*Contingut de la secció del video, on està el text, li donem la posició amb el index-z */
 .content {
     z-index: 0;
     margin-bottom: 150px;
 }
+/*Botó de contacte, donem estils i a sota definim que es faci més gran al passar el ratoí per sobre. */
 .btncontacte {
     display: inline-block;
     padding: 10px 30px;
@@ -155,6 +165,7 @@ function showPosition(position) {
 .btncontacte:hover {
     transform: scale(0.98);
 }
+/*Estils i tamanys del contenidor del mapa */
 #map { 
     height: 430px;
     width: 90%;
@@ -185,6 +196,8 @@ function showPosition(position) {
     margin-top: 3%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
+
+/*En els seguents ja definim tots els estils i posicions de les icones del footer*/
 .footer {
     background-color: #403c54;
     height: 150px;

@@ -38,100 +38,98 @@
 </head>
 <body class="tapisat">    
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class = "lang-switcher">            
-            @include('partials.language-switcher')
-        </div>
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    NearME
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>             
- 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
- 
-                    </ul>
- 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
- 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>                              
- 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
- 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>                              
- 
-                                </div>
-                            </li>
-                           
-                        @endguest
-                    </ul>
-                </div>
+            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class = "lang-switcher">            
+                @include('partials.language-switcher')
             </div>
-        </nav>
-        @guest
-            <main class="py-4">
-                @include('flash')
-                @yield('content')
-            </main>
-        @else
-        <br>
-            <div class="container" bg>  
-                @include('flash')       
-            </div>   
-
-        @endguest
-    </div>
-   
-    <div class="contacte-box">   
-        <!-- The video -->
-        <video autoplay muted loop id="myVideo">
-            <source src="video/backgroundVideo.mov" >
-        </video>
-
-        <!-- Optional: some overlay text to describe the video -->
-        <div class="contacte-text">
-        <h1>Contacta'ns</h1>
-        <h3>Envia el teu missatge</h3>
-        <a href="#" class="btn3">Formulari de contacte</a>
-        </div>
-        
-   <div>
-       <h1>Vols visitar-nos?</h1>
-
-        <h2>ubica'ns al mapa</h2>
-        
+                <div class="container">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        NearME
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>             
     
-    </div> 
-</div>
-<br>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav me-auto">
+    
+                        </ul>
+    
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ms-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                                @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
+    
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
+                                    </a>                              
+    
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+    
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>                              
+    
+                                    </div>
+                                </li>
+                            
+                            @endguest
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            @guest
+                <main class="py-4">
+                    @include('flash')
+                    @yield('content')
+                </main>
+            @else
+            <br>
+                <div class="container" bg>  
+                    @include('flash')       
+                </div>   
+
+            @endguest
+        </div>
+   
+        <div class="contacte-box">   
+            <!-- The video -->
+            <video autoplay muted loop id="myVideo">
+                <source src="video/backgroundVideo.mov" >
+            </video>
+
+            <!-- Optional: some overlay text to describe the video -->
+            <div class="contacte-text">
+                <h1>Contacta'ns</h1>
+                <h3>Envia el teu missatge</h3>
+                <a href="#" class="btn3">Formulari de contacte</a>
+            </div>
+        </div>
+            
+        <div>
+        <h1>Vols visitar-nos?</h1>
+            <h2>ubica'ns al mapa</h2>    
+        </div> 
+    </div>
+    <br>
     <div id="map">
         <script>
             var map = L.map('map').setView([51.505, -0.09], 13);

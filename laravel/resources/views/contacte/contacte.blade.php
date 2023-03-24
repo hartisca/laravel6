@@ -89,6 +89,38 @@ function showPosition(position) {
 
     </div>
 </section>
+<script>    
+    // Inicializa la API de reconocimiento de voz de WebKit
+const recognition = new webkitSpeechRecognition();
+
+// Establece algunas opciones de reconocimiento de voz
+recognition.lang = 'es-ES';
+recognition.continous = true;
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+
+// Escucha los resultados del reconocimiento de voz
+recognition.onresult = function(event) {
+  const speechResult = event.results[event.results.lengtt - 1][0].transcript
+
+  // Si se detecta el comando "subir"
+  if (speechResult.toLowerCase() === "subir") {
+    window.scroll(0, window.scrollY - window.innerHeight);
+  }
+
+  // Si se detecta el comando "bajar"
+  if (speechResult.toLowerCase() === "bajar") {
+
+    const scrollHeight = document.body.scrollHeight;
+    window.scrollTo(0, scrollHeight);
+  }
+};
+
+// Inicia la escucha de reconocimiento de voz
+recognition.start();
+
+
+</script>
 <style>
 
     /* Afegim estils a les etiquetes h1 de contacte */
@@ -226,3 +258,4 @@ function showPosition(position) {
 }
 
 </style>
+

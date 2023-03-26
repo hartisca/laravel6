@@ -6,6 +6,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="{{ asset(mix('js/app.js')) }}"></script>
+    <script src="/path/to/mousetrap.min.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 
@@ -17,36 +18,56 @@
      crossorigin=""></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <script src="keymaster.js"></script>
 <script>
+    //shortcuts
     document.getElementById("myAnchor").accessKey = "f";
-</script>
 
-<section class="showcase">
+    document.getElementById("myAnchor2").accessKey = "l";
+
+
+    //llegir tota la pagina
+    function speak() {
+  var synth = window.speechSynthesis;
+  var utterance = new SpeechSynthesisUtterance(document.body.innerText);
+  utterance.voice = synth.getVoices()[0];
+  utterance.rate = 0.9;
+  synth.speak(utterance);
+}
+
+</script>
+<button accesskey="l" id="myAnchor2" onclick="speak()">llegir pagina (alt+shift+l)</button>
+<section  class="showcase" >
     <div class="video-container">
         <video src="/video/backgroundVideo.mov" autoplay muted loop></video>
     </div>
-    <div class="content">
+   
+
+    <div class="content" id="texto-a-leer" onclick="leerTexto()">
         <h1 class="h1contacte">Contacta'ns</h1>
         <h2>Envia el teu missatge</h2>
-        <a href="www.google.com" accesskey="f" id="myAnchor" class="btncontacte">Formulari de contacte(SHFT+ALT+f)</a>
+        <a href="#" accesskey="f" id="myAnchor" class="btncontacte">Formulari de contacte(SHFT+ALT+f)</a>
     </div>
-</section>
-<section id="mapa">
-    <div class="cajamapa">
+   
+</section> 
+
+
+<section id="mapa"  >
+    <div class="cajamapa" id="texto-a-leer2" onclick="leerTexto2()">
         <div class="ubicans">
             <h1>Vols visitar-nos?</h1>
             <h2>Ubica'ns al mapa</h2>
         </div>
         <button onclick="getLocation()">Ubicarte on ets!</button>
 
-<p id="demo"></p>
+<p id="demo" ></p>
 
         <div id="map">
+ 
+</section>
             <script>
                
-
+//mapa
   const mir = { lat: 42.24, lng: 1.70 };
    var map = L.map('map').setView([41.23112, 1.72866], 18);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -68,7 +89,44 @@ function showPosition(position) {
   L.marker([ Lat, Lon ]).addTo(map).bindPopup('Estas aqui!').openPopup();
 }
 
-            
+// que llegeixi fent un clic el pare i els fills
+function leerTexto() {
+      // Obtenemos el contenido del div que queremos leer
+      const divALeer = document.getElementById('texto-a-leer');
+      const texto = divALeer.textContent.trim();
+
+      // Creamos un objeto SpeechSynthesisUtterance y lo configuramos
+      const mensaje = new SpeechSynthesisUtterance(texto);
+      mensaje.lang = 'es-ES';
+      mensaje.pitch = 1;
+      mensaje.rate = 1;
+
+      // Le decimos al motor de síntesis de voz que reproduzca el mensaje
+      window.speechSynthesis.speak(mensaje);
+    }
+    function leerTexto2() {
+      // Obtenemos el contenido del div que queremos leer
+      const divALeer2 = document.getElementById('texto-a-leer2');
+      const texto2 = divALeer2.textContent.trim();
+
+      // Creamos un objeto SpeechSynthesisUtterance y lo configuramos
+      const mensaje2 = new SpeechSynthesisUtterance(texto2);
+      mensaje.lang = 'es-ES';
+      mensaje.pitch = 1;
+      mensaje.rate = 1;
+
+      // Le decimos al motor de síntesis de voz que reproduzca el mensaje
+      window.speechSynthesis.speak(mensaje2);
+    }
+//que llegeixi fent dobleclick el text escollit
+document.addEventListener('dblclick', function(event) {
+  var element = event.target;
+  var utterance = new SpeechSynthesisUtterance(element.textContent);
+  speechSynthesis.speak(utterance);
+});
+
+
+
             </script>
         </div>
     </div>
@@ -90,37 +148,51 @@ function showPosition(position) {
     </div>
 </section>
 <script>    
-    // Inicializa la API de reconocimiento de voz de WebKit
-const recognition = new webkitSpeechRecognition();
+    const recognition = new webkitSpeechRecognition();
 
-// Establece algunas opciones de reconocimiento de voz
-recognition.lang = 'es-ES';
-recognition.continous = true;
-recognition.interimResults = false;
-recognition.maxAlternatives = 1;
+    // Establece algunas opciones de reconocimiento de voz
+    recognition.lang = 'es-ES';
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
 
-// Escucha los resultados del reconocimiento de voz
-recognition.onresult = function(event) {
-  const speechResult = event.results[event.results.lengtt - 1][0].transcript
+    // Escucha los resultados del reconocimiento de voz
+    recognition.onresult = function(event) {
+    const speechResult = event.results[event.results.length - 1][0].transcript;
+    
+        if (speechResult.toLowerCase() === "arriba" || speechResult.toLowerCase() === "scroll up") {
+            window.scrollBy(0, -100);
+        } else if (speechResult.toLowerCase() === "abajo" || speechResult.toLowerCase() === "scroll down") {
+            window.scrollBy(0, 100);
+        } else if (speechResult.toLowerCase() === "acercar" || speechResult.toLowerCase() === "zoom in") {
+            document.body.style.zoom = parseFloat(document.body.style.zoom) + 0.1;
+        } else if (speechResult.toLowerCase() === "alejar" || speechResult.toLowerCase() === "zoom out") {
+            document.body.style.zoom = parseFloat(document.body.style.zoom) - 0.1;
+        }
+    };
 
-  // Si se detecta el comando "subir"
-  if (speechResult.toLowerCase() === "subir") {
-    window.scroll(0, window.scrollY - window.innerHeight);
-  }
+    // Inicia la escucha de reconocimiento de voz
+    recognition.start();
 
-  // Si se detecta el comando "bajar"
-  if (speechResult.toLowerCase() === "bajar") {
+    // Función para restaurar la altura y el zoom de la página
+    function restoreDefaults() {
+        // Restaurar la altura a la posición inicial
+        window.scrollTo(0, 0);
 
-    const scrollHeight = document.body.scrollHeight;
-    window.scrollTo(0, scrollHeight);
-  }
-};
+        // Restaurar el zoom a la posición inicial
+        document.body.style.zoom = 1;
+    }
 
-// Inicia la escucha de reconocimiento de voz
-recognition.start();
-
-
+    // Agregar un evento de teclado para detectar la combinación de teclas
+    document.addEventListener('keydown', function(event) {
+    // Verificar si se presionaron las teclas "Ctrl" y "Shift" y la tecla "R"
+    if (event.ctrlKey && event.shiftKey && event.key === 'R') {
+        // Restaurar los valores predeterminados
+        restoreDefaults();
+    }
+    });
 </script>
+
 <style>
 
     /* Afegim estils a les etiquetes h1 de contacte */

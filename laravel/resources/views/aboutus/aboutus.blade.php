@@ -450,8 +450,7 @@ window.addEventListener('click', outsideClick);
 
 function outsideClick(e) {
     if (e.target == modal) {
-        modal.style.display = 'none';
-        
+        modal.style.display = 'none';        
         stopVideoM();
     }
 
@@ -482,47 +481,5 @@ function changeSourceM(event) {
    video2m.filename = "video/The.wait.mp4";
 
 </script>
-
-<script>
-    // create a SpeechRecognition object
-const recognition = new window.webkitSpeechRecognition();
-// set the language to Spanish
-recognition.lang = 'es-ES';
-// set continuous recognition to true
-recognition.continuous = true;
-
-// define the minimum and maximum zoom levels
-const minZoom = 50;
-const maxZoom = 200;
-// get the initial zoom level
-let currentZoom = document.documentElement.clientWidth / window.innerWidth * 100;
-
-// add an event listener to handle speech recognition results
-recognition.onresult = (event) => {
-  // get the transcript of the spoken text
-  const transcript = event.results[event.results.length - 1][0].transcript;
-  
-  // check if the transcript contains the word "acercar" (zoom in)
-  if (transcript.includes('acercar')) {
-    // increase the zoom level
-    currentZoom = Math.min(currentZoom + 10, maxZoom);
-    // set the new zoom level
-    document.body.style.zoom = `${currentZoom}%`;
-  }
-  
-  // check if the transcript contains the word "alejar" (zoom out)
-  if (transcript.includes('alejar')) {
-    // decrease the zoom level
-    currentZoom = Math.max(currentZoom - 10, minZoom);
-    // set the new zoom level
-    document.body.style.zoom = `${currentZoom}%`;
-  }
-};
-
-// start the speech recognition
-recognition.start();
-
-</script>
-
 </body>
 
